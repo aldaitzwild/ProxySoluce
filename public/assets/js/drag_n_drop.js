@@ -1,12 +1,18 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const skillsPool = document.querySelector('.skills');
+  const dropZone = document.querySelector('.drop-zone');
   sortChildren(skillsPool, 'id');
 
-  // If POST variable, set event listener to remove buttons of selected skills
+  let filter;
 
-  const skillRemoveButtons = document.querySelectorAll('.remove-skill');
+  const filterInput = document.querySelector('.skills-filter');
+  addSortingHandler(filterInput, filter, skillsPool, skillsPool.children);
 
-  if (skillRemoveButtons.length > 0) {
+  // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
+  if (dropZone.children.length > 0) {
+    sortChildren(dropZone, 'id');
+
+    const skillRemoveButtons = document.querySelectorAll('.remove-skill');
     skillRemoveButtons.forEach((button) =>
       addRemoveButtonHandler(button, button.parentNode, skillsPool)
     );
@@ -76,6 +82,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Handle skill drop and skill removal
 
   function handleDropZone(e) {
+    this.classList.remove('over');
+    this.classList.remove('border-primary');
     const target = e.target;
     if (target) {
       e.preventDefault();
@@ -97,8 +105,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
       addRemoveButtonHandler(removeSkillButton, skillToBeRemoved, skillsPool);
     }
   }
-
-  const dropZone = document.querySelector('.drop-zone');
 
   dropZone.addEventListener('dragenter', handleDragEnter);
   dropZone.addEventListener('dragleave', handleDragLeave);
@@ -130,6 +136,32 @@ function addRemoveButtonHandler(button, skillToBeRemoved, skillsPool) {
       /* Add skill to skill pool and sort skill pool */
       skillsPool.appendChild(skillToBeRemoved);
       sortChildren(skillsPool, 'id');
+    }
+  });
+}
+
+function addSortingHandler(input, filter, skillsPool, skillsInitial) {
+  const skills = [].slice.call(skillsInitial);
+  input.addEventListener('input', function handleChangeValue(e) {
+    const target = e.target;
+
+    if (target) {
+      filter = input.value.toLowerCase();
+
+      if (filter === '') {
+        skillsPool.innerHTML = '';
+        skills.forEach((skill) => {
+          if (skill.children[1] === undefined) skillsPool.appendChild(skill);
+        });
+      } else {
+        const skillsFiltered = skills.filter(
+          (skill) =>
+            skill['id'].toLowerCase().includes(filter) &&
+            skill.children[1] === undefined
+        );
+        skillsPool.innerHTML = '';
+        skillsFiltered.forEach((skill) => skillsPool.appendChild(skill));
+      }
     }
   });
 }

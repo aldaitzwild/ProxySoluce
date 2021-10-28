@@ -154,10 +154,8 @@ function addFilterHandler(input, skillsInitial, skillsPool, update = false) {
 
   if (update) {
     input.removeEventListener('input', handleChangeValue);
-    input.addEventListener('input', handleChangeValue);
-  } else {
-    input.addEventListener('input', handleChangeValue);
   }
+  input.addEventListener('input', handleChangeValue);
 }
 
 /* ************************************************* */
@@ -181,27 +179,23 @@ function filterSkills(input, skills, skillsContainer) {
   const filter = input.value.toLowerCase();
 
   if (filter === '') {
-    updateSkills(skillsContainer, skills, true);
+    updateSkills(skillsContainer, skills);
   } else {
-    const skillsFiltered = skills.filter(
-      (skill) => skill['id'].toLowerCase().includes(filter) && !skill.checked
+    const skillsFiltered = skills.filter((skill) =>
+      skill['id'].toLowerCase().includes(filter)
     );
-
     updateSkills(skillsContainer, skillsFiltered);
   }
 }
 
 // Update skills display in container
 
-function updateSkills(container, skills, filterCheckedSkills = false) {
+function updateSkills(container, skills) {
   container.innerHTML = '';
-  if (filterCheckedSkills) {
-    skills.forEach((skill) => {
-      if (!skill.checked) container.appendChild(skill);
-    });
-  } else {
-    skills.forEach((skill) => container.appendChild(skill));
-  }
+
+  skills.forEach((skill) => {
+    if (!skill.checked) container.appendChild(skill);
+  });
 }
 
 /* ************************************************* */

@@ -1,0 +1,32 @@
+<h2>Test Drag'n Drop</h2>
+
+<div class="container">
+	<input type="text" value="" class="skills-filter btn btn-light my-3 text-left" placeholder="Seach skills">
+	<ul class="skills container list-group list-group-horizontal-sm flex-wrap">
+
+		{% for skillValue, skill in skills %}
+			<li class="skills__item list-group-item m-2 border border-secondary d-flex align-items-center" draggable="true" id="{{skillValue}}">{{skill}}
+				<input type="hidden" name="skill[]" value="{{skillValue}}">
+			</li>
+		{% endfor %}
+
+	</ul>
+	<form action="" method="POST">
+		<ul class="drop-zone container list-group list-group-horizontal-sm flex-wrap align-items-start align-content-start border border-secondary mt-5 vh-50">
+			{% if selected is defined %}
+				{% for skillValue, skill in selected %}
+					<li class="skills__item list-group-item m-2 border border-secondary d-flex align-items-center" draggable="true" id="{{skillValue}}">{{skill}}
+						<input type="hidden" name="skill[]" value="{{skillValue}}">
+						<button type='button' class='remove-skill ml-2 px-1 py-0 btn btn-danger'>X</button>
+					</li>
+
+				{% endfor %}
+
+			{% endif %}
+
+		</ul>
+		<input type="submit" value="Submit" class="btn btn-primary mt-3">
+	</form>
+
+
+</div>

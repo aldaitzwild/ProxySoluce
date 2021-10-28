@@ -114,7 +114,6 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
     const target = e.target;
     if (target) {
       const skillToBeRemoved = target.parentNode;
-      console.log(skillToBeRemoved.firstChild.nodeValue);
       if (
         !confirm(
           `\n!!! Are you sure you to remove the following skill ?\n\n-- ${skillToBeRemoved.firstChild.nodeValue.trim()} --`
@@ -179,14 +178,12 @@ function sortSkills(parent, itemToCompare) {
 // Filter skills within container
 
 function filterSkills(input, skills, skillsContainer) {
-  const skillsToFilter = skills;
-
   const filter = input.value.toLowerCase();
 
   if (filter === '') {
-    updateSkills(skillsContainer, skillsToFilter, true);
+    updateSkills(skillsContainer, skills, true);
   } else {
-    const skillsFiltered = skillsToFilter.filter(
+    const skillsFiltered = skills.filter(
       (skill) => skill['id'].toLowerCase().includes(filter) && !skill.checked
     );
 

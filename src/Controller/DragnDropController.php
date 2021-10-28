@@ -12,7 +12,15 @@ class DragnDropController extends AbstractController
             'mecanique' => 'Mécanique',
             'menuiserie' => 'Menuiserie',
             'montage-meuble' => 'Montage de meuble',
-            'plomberie' => 'Plomberie'
+            'plomberie' => 'Plomberie',
+            'electricite' => 'Electricité',
+            'carrelage' => 'Carrelage',
+            'carrosserie' => 'Carrosserie',
+            'electronique' => 'Electronique',
+            'informatique' => 'Informatique',
+            'menage' => 'Ménage',
+            'repassage' => 'Repassage'
+
         ];
 
 

@@ -1,27 +1,26 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const skillsPool = document.querySelector('.skills');
   const dropZone = document.querySelector('.drop-zone');
-  sortChildren(skillsPool, 'id');
+  const skillsInitial = [].slice.call(skillsPool.children);
 
-  let filter;
+  sortSkills(skillsPool, 'id');
 
   const filterInput = document.querySelector('.skills-filter');
-  addSortingHandler(filterInput, filter, skillsPool, skillsPool.children);
+  addFilterHandler(filterInput, skillsInitial, skillsPool);
 
   // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
   if (dropZone.children.length > 0) {
-    sortChildren(dropZone, 'id');
+    sortSkills(dropZone, 'id');
 
     const skillRemoveButtons = document.querySelectorAll('.remove-skill');
     skillRemoveButtons.forEach((button) =>
-      addRemoveButtonHandler(button, button.parentNode, skillsPool)
+      addRemoveButtonHandler(button, skillsPool, filterInput, skillsInitial)
     );
   }
 
-  // Initialize dragged element and skill to be removed element (in drop zone)
+  // Initialize dragged element
 
   let dragged;
-  let skillToBeRemoved;
 
   /* Start and end drag n drop sequence */
   function handleDragStart(e) {
@@ -67,8 +66,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   function handleDragLeave(e) {
     this.classList.add('border-secondary');
-    this.classList.remove('over');
-    this.classList.remove('border-primary');
   }
 
   function handleDragOver(e) {
@@ -82,8 +79,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Handle skill drop and skill removal
 
   function handleDropZone(e) {
-    this.classList.remove('over');
     this.classList.remove('border-primary');
+    this.classList.add('border-secondary');
     const target = e.target;
     if (target) {
       e.preventDefault();
@@ -92,17 +89,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       target.appendChild(dragged);
 
       /* Add remove button to skill */
-      dragged.insertAdjacentHTML(
-        'beforeend',
-        "<button type='button' class='remove-skill ml-2 px-1 py-0 btn btn-danger'>X</button>"
-      );
-
-      // Skill removal function
-
-      const removeSkillButton = document.querySelector(
-        `#${dragged.id} .remove-skill`
-      );
-      addRemoveButtonHandler(removeSkillButton, skillToBeRemoved, skillsPool);
+      addRemoveButton(dragged, skillsPool, filterInput, skillsInitial);
     }
   }
 
@@ -112,20 +99,22 @@ document.addEventListener('DOMContentLoaded', (event) => {
   dropZone.addEventListener('drop', handleDropZone);
 });
 
-function sortChildren(parent, itemToCompare) {
-  const childSorted = [].slice
-    .call(parent.children)
-    .sort((a, b) => a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`]));
+/* ******************************************************************************* */
+/* ******************************************************************************* */
+/* ******************************************************************************* */
 
-  parent.innerHTML = '';
-  childSorted.forEach((child) => parent.appendChild(child));
-}
+/* ************************************************* */
+/* Handler functions */
+/* ************************************************* */
 
-function addRemoveButtonHandler(button, skillToBeRemoved, skillsPool) {
+// Remove button handler
+
+function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
   button.addEventListener('click', function handleRemoveSkill(e) {
     const target = e.target;
     if (target) {
-      skillToBeRemoved = target.parentNode;
+      const skillToBeRemoved = target.parentNode;
+      skillToBeRemoved.checked = false;
 
       /* Delete remove button from skill */
       skillToBeRemoved.removeChild(skillToBeRemoved.children[1]);
@@ -134,34 +123,102 @@ function addRemoveButtonHandler(button, skillToBeRemoved, skillsPool) {
       skillToBeRemoved.parentNode.removeChild(skillToBeRemoved);
 
       /* Add skill to skill pool and sort skill pool */
-      skillsPool.appendChild(skillToBeRemoved);
-      sortChildren(skillsPool, 'id');
+      skillsInitialIds = skillsInitial.map((x) => x.id);
+      if (!skillsInitialIds.includes(skillToBeRemoved.id))
+        skillsInitial.push(skillToBeRemoved);
+
+      sortSkills(skillsPool, 'id');
+      addFilterHandler(input, skillsInitial, skillsPool, true);
+      filterSkills(input, skillsInitial, skillsPool);
     }
   });
 }
 
-function addSortingHandler(input, filter, skillsPool, skillsInitial) {
-  const skills = [].slice.call(skillsInitial);
-  input.addEventListener('input', function handleChangeValue(e) {
+// Input filter handler
+
+function addFilterHandler(input, skillsInitial, skillsPool, update = false) {
+  function handleChangeValue(e) {
     const target = e.target;
 
     if (target) {
-      filter = input.value.toLowerCase();
-
-      if (filter === '') {
-        skillsPool.innerHTML = '';
-        skills.forEach((skill) => {
-          if (skill.children[1] === undefined) skillsPool.appendChild(skill);
-        });
-      } else {
-        const skillsFiltered = skills.filter(
-          (skill) =>
-            skill['id'].toLowerCase().includes(filter) &&
-            skill.children[1] === undefined
-        );
-        skillsPool.innerHTML = '';
-        skillsFiltered.forEach((skill) => skillsPool.appendChild(skill));
-      }
+      filterSkills(input, skillsInitial, skillsPool);
     }
-  });
+  }
+
+  if (update) {
+    input.removeEventListener('input', handleChangeValue);
+    input.addEventListener('input', handleChangeValue);
+  } else {
+    input.addEventListener('input', handleChangeValue);
+  }
+}
+
+/* ************************************************* */
+/* Helper functions */
+/* ************************************************* */
+
+// Sort skills within container
+
+function sortSkills(parent, itemToCompare) {
+  const childSorted = [].slice
+    .call(parent.children)
+    .sort((a, b) => a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`]));
+
+  parent.innerHTML = '';
+  childSorted.forEach((child) => parent.appendChild(child));
+}
+
+// Filter skills within container
+
+function filterSkills(input, skills, skillsContainer) {
+  const skillsToFilter = skills;
+
+  const filter = input.value.toLowerCase();
+
+  if (filter === '') {
+    updateSkills(skillsContainer, skillsToFilter, true);
+  } else {
+    const skillsFiltered = skillsToFilter.filter(
+      (skill) => skill['id'].toLowerCase().includes(filter) && !skill.checked
+    );
+
+    updateSkills(skillsContainer, skillsFiltered);
+  }
+}
+
+// Update skills display in container
+
+function updateSkills(container, skills, filterCheckedSkills = false) {
+  container.innerHTML = '';
+  if (filterCheckedSkills) {
+    skills.forEach((skill) => {
+      if (!skill.checked) container.appendChild(skill);
+    });
+  } else {
+    skills.forEach((skill) => container.appendChild(skill));
+  }
+}
+
+/* ************************************************* */
+// Add remove button function to skill upon drag in drop zone
+/* ************************************************* */
+
+function addRemoveButton(skill, skillsPool, filterInput, skillsInitial) {
+  skill.insertAdjacentHTML(
+    'beforeend',
+    "<button type='button' class='remove-skill ml-2 px-1 py-0 btn btn-danger'>X</button>"
+  );
+
+  skill.checked = true;
+
+  // Skill removal function
+  const removeSkillButton = document.querySelector(
+    `#${skill.id} .remove-skill`
+  );
+  addRemoveButtonHandler(
+    removeSkillButton,
+    skillsPool,
+    filterInput,
+    skillsInitial
+  );
 }

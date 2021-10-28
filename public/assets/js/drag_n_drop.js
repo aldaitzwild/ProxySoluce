@@ -114,6 +114,14 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
     const target = e.target;
     if (target) {
       const skillToBeRemoved = target.parentNode;
+      console.log(skillToBeRemoved.firstChild.nodeValue);
+      if (
+        !confirm(
+          `\n!!! Are you sure you to remove the following skill ?\n\n-- ${skillToBeRemoved.firstChild.nodeValue.trim()} --`
+        )
+      ) {
+        return;
+      }
       skillToBeRemoved.checked = false;
 
       /* Delete remove button from skill */

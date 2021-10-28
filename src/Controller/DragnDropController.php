@@ -25,8 +25,6 @@ class DragnDropController extends AbstractController
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['skill'])) {
-            var_dump($_POST);
-            // clean $_POST data
             $selected = [];
             foreach ($_POST['skill'] as $skill) {
                 $selected[$skill] = $skills[$skill];

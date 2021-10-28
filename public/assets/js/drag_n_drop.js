@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
   if (dropZone.children.length > 0) {
-    sortSkills(dropZone, 'id');
+    sortSkills(dropZone, 'id', false);
 
     const skillRemoveButtons = document.querySelectorAll('.remove-skill');
     skillRemoveButtons.forEach((button) =>
@@ -164,13 +164,12 @@ function addFilterHandler(input, skillsInitial, skillsPool, update = false) {
 
 // Sort skills within container
 
-function sortSkills(parent, itemToCompare) {
+function sortSkills(parent, itemToCompare, filterChecked = true) {
   const childSorted = [].slice
     .call(parent.children)
     .sort((a, b) => a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`]));
 
-  parent.innerHTML = '';
-  childSorted.forEach((child) => parent.appendChild(child));
+  updateSkills(parent, childSorted, filterChecked);
 }
 
 // Filter skills within container
@@ -190,12 +189,16 @@ function filterSkills(input, skills, skillsContainer) {
 
 // Update skills display in container
 
-function updateSkills(container, skills) {
+function updateSkills(container, skills, filterChecked = true) {
   container.innerHTML = '';
 
-  skills.forEach((skill) => {
-    if (!skill.checked) container.appendChild(skill);
-  });
+  if (filterChecked) {
+    skills.forEach((skill) => {
+      if (!skill.checked) container.appendChild(skill);
+    });
+  } else {
+    skills.forEach((skill) => container.appendChild(skill));
+  }
 }
 
 /* ************************************************* */

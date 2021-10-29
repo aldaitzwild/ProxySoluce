@@ -1,25 +1,35 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   const skillsPool = document.querySelector('.skills');
   const dropZone = document.querySelector('.drop-zone');
-  const skillsInitial = [].slice.call(skillsPool.children);
 
-  sortSkills(skillsPool, 'id');
+  const skillsInitial = [].slice.call(skillsPool.children);
+  sortSkills(skillsInitial, 'id');
+  updateSkills(skillsPool, skillsInitial);
 
   const filterInput = document.querySelector('.skills-filter');
   addFilterHandler(filterInput, skillsInitial, skillsPool);
 
   // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
   if (dropZone.children.length > 0) {
-    sortSkills(dropZone, 'id', false);
+    const skillsSelected = [].slice.call(dropZone.children);
+    sortSkills(skillsSelected, 'id');
+    updateSkills(dropZone, skillsSelected, false);
 
-    const skillRemoveButtons = document.querySelectorAll('.remove-skill');
-    skillRemoveButtons.forEach((button) =>
-      addRemoveButtonHandler(button, skillsPool, filterInput, skillsInitial)
-    );
+    skillsSelected.forEach((skill) => {
+      skill.checked = true;
+      skillsInitial.push(skill);
+    });
+
+    sortSkills(skillsInitial, 'id');
   }
 
-  // Initialize dragged element
+  // Add remove handler to all removeButtons
+  const skillRemoveButtons = document.querySelectorAll('.remove-skill');
+  skillRemoveButtons.forEach((button) =>
+    addRemoveButtonHandler(button, skillsPool, filterInput, skillsInitial)
+  );
 
+  // Initialize dragged element
   let dragged;
 
   /* Start and end drag n drop sequence */
@@ -84,12 +94,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const target = e.target;
     if (target) {
       e.preventDefault();
-      // Get the id of the target and add the moved element to the target's DOM
+      // Add the moved element to the target's DOM
       dragged.parentNode.removeChild(dragged);
       target.appendChild(dragged);
 
-      /* Add remove button to skill */
-      addRemoveButton(dragged, skillsPool, filterInput, skillsInitial);
+      dragged.checked = true;
     }
   }
 
@@ -116,25 +125,16 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
       const skillToBeRemoved = target.parentNode;
       if (
         !confirm(
-          `\n!!! Are you sure you to remove the following skill ?\n\n-- ${skillToBeRemoved.firstChild.nodeValue.trim()} --`
+          `\n!!! Are you sure you want to remove the following skill ?\n\n-- ${skillToBeRemoved.firstChild.nodeValue.trim()} --`
         )
       ) {
         return;
       }
       skillToBeRemoved.checked = false;
 
-      /* Delete remove button from skill */
-      skillToBeRemoved.removeChild(skillToBeRemoved.children[1]);
-
       /* Remove skill from dropzone */
       skillToBeRemoved.parentNode.removeChild(skillToBeRemoved);
 
-      /* Add skill to skill pool and sort skill pool */
-      skillsInitialIds = skillsInitial.map((x) => x.id);
-      if (!skillsInitialIds.includes(skillToBeRemoved.id))
-        skillsInitial.push(skillToBeRemoved);
-
-      sortSkills(skillsPool, 'id');
       addFilterHandler(input, skillsInitial, skillsPool, true);
       filterSkills(input, skillsInitial, skillsPool);
     }
@@ -162,26 +162,16 @@ function addFilterHandler(input, skillsInitial, skillsPool, update = false) {
 /* Helper functions */
 /* ************************************************* */
 
-// Sort skills within container
-
-function sortSkills(parent, itemToCompare, filterChecked = true) {
-  const childSorted = [].slice
-    .call(parent.children)
-    .sort((a, b) => a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`]));
-
-  updateSkills(parent, childSorted, filterChecked);
-}
-
 // Filter skills within container
 
 function filterSkills(input, skills, skillsContainer) {
   const filter = input.value.toLowerCase();
 
-  if (filter === '') {
+  if (!filter === '') {
     updateSkills(skillsContainer, skills);
   } else {
     const skillsFiltered = skills.filter((skill) =>
-      skill['id'].toLowerCase().includes(filter)
+      skill.firstChild.nodeValue.toLowerCase().includes(filter)
     );
     updateSkills(skillsContainer, skillsFiltered);
   }
@@ -201,26 +191,10 @@ function updateSkills(container, skills, filterChecked = true) {
   }
 }
 
-/* ************************************************* */
-// Add remove button function to skill upon drag in drop zone
-/* ************************************************* */
+// Sort skills
 
-function addRemoveButton(skill, skillsPool, filterInput, skillsInitial) {
-  skill.insertAdjacentHTML(
-    'beforeend',
-    "<button type='button' class='remove-skill ml-2 px-1 py-0 btn btn-danger'>X</button>"
-  );
-
-  skill.checked = true;
-
-  // Skill removal function
-  const removeSkillButton = document.querySelector(
-    `#${skill.id} .remove-skill`
-  );
-  addRemoveButtonHandler(
-    removeSkillButton,
-    skillsPool,
-    filterInput,
-    skillsInitial
+function sortSkills(array, itemToCompare) {
+  array.sort((a, b) =>
+    a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`])
   );
 }

@@ -10,3 +10,11 @@
 .skills__item {
   cursor: move;
 }
+
+.skills .skills__item .remove-skill {
+  display: none;
+}
+
+.drop-zone .skills__item .remove-skill {
+  display: block;
+}

@@ -6,9 +6,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   sortSkills(skillsInitial, 'id');
   updateSkills(skillsPool, skillsInitial);
 
-  const filterInput = document.querySelector('.skills-filter');
-  addFilterHandler(filterInput, skillsInitial, skillsPool);
-
   // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
   if (dropZone.children.length > 0) {
     const skillsSelected = [].slice.call(dropZone.children);
@@ -22,6 +19,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     sortSkills(skillsInitial, 'id');
   }
+
+  const filterInput = document.querySelector('.skills-filter');
+  addFilterHandler(filterInput, skillsInitial, skillsPool);
 
   // Add remove handler to all removeButtons
   const skillRemoveButtons = document.querySelectorAll('.remove-skill');
@@ -135,7 +135,6 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
       /* Remove skill from dropzone */
       skillToBeRemoved.parentNode.removeChild(skillToBeRemoved);
 
-      addFilterHandler(input, skillsInitial, skillsPool, true);
       filterSkills(input, skillsInitial, skillsPool);
     }
   });
@@ -143,17 +142,13 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
 
 // Input filter handler
 
-function addFilterHandler(input, skillsInitial, skillsPool, update = false) {
+function addFilterHandler(input, skillsInitial, skillsPool) {
   function handleChangeValue(e) {
     const target = e.target;
 
     if (target) {
       filterSkills(input, skillsInitial, skillsPool);
     }
-  }
-
-  if (update) {
-    input.removeEventListener('input', handleChangeValue);
   }
   input.addEventListener('input', handleChangeValue);
 }

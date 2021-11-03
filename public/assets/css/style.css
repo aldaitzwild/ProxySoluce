@@ -1,0 +1,79 @@
+body {
+    background-color: rgb(159, 144, 228);
+}
+
+.container {
+    justify-content: flex-end;
+   
+}
+.logo {
+    margin-left: 20px;
+}
+
+button {
+    
+    border: none;
+}
+
+.annonces {
+    padding: 25px;
+    text-align: center;
+   
+    
+}
+.annonce {
+    background-color: rgb(204, 70, 204) ;
+color: white;
+}
+.container1 {
+    background-color: rgb(44, 42, 42);
+    border: rgb(204, 70, 204);
+    border-style: solid;
+    border-width: 1px;
+    padding: 5px;
+    width: 150px;
+    
+    
+   
+    
+}
+.nav-link1 {
+    color:rgb(204, 70, 204) ;
+    text-decoration: none;
+    
+}
+
+.container2 {
+    background-color: rgb(204, 70, 204);
+    padding: 5px;
+    width: 150px;
+    margin-right: 5px;
+   
+    
+}
+.nav-link2 {
+    color: white;
+    text-decoration: none;
+}
+
+.header {
+    background-color: blanchedalmond;
+}
+.container3 {
+    padding: 20px;
+    }
+
+.container4{
+    position: relative;
+    }
+
+   .texte_centrer {
+    position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 50px;
+  text-shadow: #000000 1px 1px, #000000 -1px 1px, #000000 -1px -1px, #000000 1px -1px;
+  text-align: center;
+}

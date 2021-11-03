@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(159, 144, 228);
+    background-color: rgb(185, 176, 224);
 }
 
 .container {
@@ -16,18 +16,21 @@ button {
 }
 
 .annonces {
-    padding: 25px;
+    padding: 15px;
     text-align: center;
    
     
 }
 .annonce {
-    background-color: rgb(204, 70, 204) ;
+    background-color: rgb(221, 153, 221) ;
 color: white;
+border-style: solid;
+    border-width: 1px;
+
 }
 .container1 {
     background-color: rgb(44, 42, 42);
-    border: rgb(204, 70, 204);
+    border: rgb(221, 153, 221) ;
     border-style: solid;
     border-width: 1px;
     padding: 5px;
@@ -38,13 +41,13 @@ color: white;
     
 }
 .nav-link1 {
-    color:rgb(204, 70, 204) ;
+    color:rgb(221, 153, 221) ;
     text-decoration: none;
     
 }
 
 .container2 {
-    background-color: rgb(204, 70, 204);
+    background-color: rgb(221, 153, 221) ;
     padding: 5px;
     width: 150px;
     margin-right: 5px;
@@ -56,15 +59,20 @@ color: white;
     text-decoration: none;
 }
 
-.header {
-    background-color: blanchedalmond;
+.carousel {
+   text-align: center;
+    border-radius: ;
 }
+
+
+
 .container3 {
     padding: 20px;
     }
 
 .container4{
     position: relative;
+    
     }
 
    .texte_centrer {
@@ -73,7 +81,8 @@ color: white;
   left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 50px;
+  font-size: 250%;
   text-shadow: #000000 1px 1px, #000000 -1px 1px, #000000 -1px -1px, #000000 1px -1px;
   text-align: center;
+  
 }

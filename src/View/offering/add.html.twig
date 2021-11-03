@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offres</title>
+</head>
+<body>
+    <h1>Ajouter une nouvelle offre</h1>
+
+    <form method="post">
+        <div>
+            <p>
+                <label for="category-select">Choisir une catégorie</label>
+
+                <select name="category" id="category-select">
+                    <option value="">Choisir une catégorie (obligatoire)</option>
+                    <option value="bricolage">Bricolage</option>
+                    <option value="jardinage">Jardinage</option>
+                    <option value="plomberie">Plomberie</option>
+                    <option value="electricité">Electricité</option>
+                    <option value="service à la personne">Service à la personne</option>
+                </select>
+            </p>
+
+            <p>
+                <label for="title">Titre</label>
+                <input type="text" name="title" id="title">
+            </p>
+
+            <p>
+                <label for="description">Description de l'offre</label>
+                <textarea name="description" id="desciption" cols="50" rows="20"></textarea>
+            </p>
+
+            
+            <p>
+                <label for="city-select">Choisir une ville</label>
+
+                <select name="city" id="city-select">
+                    <option value="">Choisir une ville (obligatoire)</option>
+                    <option value="Lyon">Lyon</option>
+                    <option value="Vienne">Vienne</option>
+                    <option value="Villeurbannes">Villerbannes</option>
+                </select>
+            </p>
+
+            <p>
+                <input type="submit" value="Envoyer">
+            </p>
+
+        </div>
+
+
+    </form>
+
+
+</body>
+</html>

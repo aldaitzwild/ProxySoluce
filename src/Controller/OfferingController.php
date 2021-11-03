@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\OfferingManager;
+use App\Model\CategoryManager;
 
 class OfferingController extends AbstractController
 {
@@ -10,10 +11,13 @@ class OfferingController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-            $offering = array_map('trim', $_POST);
+            $offering = $category = array_map('trim', $_POST);
             // TODO validations (length, format...)
 
             // if validation is ok, insert and redirection
+
+            $categoryManager = new CategoryManager();
+            $categoryManager->insert($category);
 
             $offeringManager = new OfferingManager();
             $offeringManager->insert($offering);

@@ -1,0 +1,74 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+	{# include css files for boostrap from CDN#}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+	<div class='mx-auto w-75 text-center'>
+		<h2>Recherche d'annonces</h2>
+
+		<h3>Recherche par catégorie</h3>
+		<form method="POST" class="border border-primary">
+			<div>
+				<label for="category">Catégorie:
+				</label>
+				<select id="category" name="category">
+					<option value="default" disabled>--Sélectionnez une catégorie--</option>
+					{% for category in categories %}
+						<option value="{{ category.name }}">{{ category.name }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div>
+				<label for="city">Ville:</label>
+				<input type="text" id="city" name="city">
+			</div>
+			{% if errors is defined %}
+				{% for error in errors %}
+					<p>{{error}}
+					</p>
+				{% endfor %}
+			{% endif %}
+			<input type="submit" value="Search">
+		</form>
+
+		{% if offers %}
+
+			<h3>Résultats:</h3>
+			{% for offer in offers %}
+				<div>
+					<h4>{{offer.title}}</h4>
+					<p>{{offer.forname ~ " " ~ offer.name}}
+					</p>
+					<p>Catégorie:
+						{{offer.category}}
+					</p>
+					<p>{{offer.description}}
+					</p>
+
+
+				</div>
+
+			{% endfor %}
+
+		{% endif %}
+	</div>
+
+
+	{# To be confirmed if we search by skill #}
+
+	{# <h3>Recherche par compétence</h3>
+																											<form method="POST">
+																												<label for="skill">Compétence:
+																												</label>
+																												<select id="skill" name="skill">
+																													<option value="default" disabled>--Sélectionnez une compétence--</option>
+																													{% for skill in skills %}
+																														<option value="{{ skill.name }} ">{{ skill.name }}</option>
+																													{% endfor %}
+																												</select>
+																												<input type="submit" value="Search">
+																											</form> #}
+
+
+{% endblock %}

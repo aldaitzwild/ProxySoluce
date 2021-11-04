@@ -5,51 +5,50 @@
 {% endblock %}
 {% block content %}
     <main class="container">
-    <h1>Ajouter une nouvelle offre</h1>
+        <h1>Ajouter une nouvelle offre</h1>
 
-    <form method="post">
-        <div>
-            <p>
-                <label for="category-select">Choisir une catégorie</label>
+        <form method="post">
+            <div>
+                <p class="row">
+                    <label for="category">Catégorie:
+						</label>
+						<select id="category" name="category">
+							<option value="default" disabled>--Sélectionnez une catégorie--</option>
+							{% for category in categories %}
+								<option value="{{ category.name }}">{{ category.name }}</option>
+							{% endfor %}
+						</select>
+                </p>
 
-                <select name="category_id" id="category-select">
-                    <option value="">Choisir une catégorie (obligatoire)</option>
-                    <option value="1">Bricolage</option>
-                    <option value="2">Jardinage</option>
-                    <option value="3">Plomberie</option>
-                    <option value="4">Electricité</option>
-                    <option value="5">Service à la personne</option>
-                </select>
-            </p>
+                <p class="row">
+                    <label for="title">Titre</label>
+                    <input type="text" name="title" id="title">
+                </p>
 
-            <p>
-                <label for="title">Titre</label>
-                <input type="text" name="title" id="title">
-            </p>
+                <p class="row">
+                    <label for="description">Description de l'offre</label>
+                    <textarea name="description" id="desciption" cols="15" rows="7"></textarea>
+                </p>
 
-            <p>
-                <label for="description">Description de l'offre</label>
-                <textarea name="description" id="desciption" cols="20" rows="10"></textarea>
-            </p>
+                
+                <p class="row">
+                    <label for="city-select">Choisir une ville</label>
 
-            
-            <p>
-                <label for="city-select">Choisir une ville</label>
+                    <select name="city" id="city-select">
+                        <option value="">Choisir une ville (obligatoire)</option>
+                        <option value="Lyon">Lyon</option>
+                        <option value="Vienne">Vienne</option>
+                        <option value="Villeurbannes">Villerbannes</option>
+                    </select>
+                </p>
 
-                <select name="city" id="city-select">
-                    <option value="">Choisir une ville (obligatoire)</option>
-                    <option value="Lyon">Lyon</option>
-                    <option value="Vienne">Vienne</option>
-                    <option value="Villeurbannes">Villerbannes</option>
-                </select>
-            </p>
+                <p class="row">
+                    <input type="submit" value="Envoyer">
+                </p>
 
-            <p>
-                <input type="submit" value="Envoyer">
-            </p>
-
-        </div>
+            </div>
 
 
-    </form>
+        </form>
+    </main>
 {% endblock %}

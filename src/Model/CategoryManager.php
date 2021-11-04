@@ -2,18 +2,16 @@
 
 namespace App\Model;
 
+use PDO;
+
 class CategoryManager extends AbstractManager
-{ 
-    public const TABLE = 'category';
+{
+    private const TABLE_CATEGORY = 'category';
 
-    
-
-    public function insert(array $category): int
+    public function getAllCategories(): array
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (name) VALUES (:name)");
-        $statement->bindValue('name', $category['name'], \PDO::PARAM_STR);
+        $statement = $this->pdo->query("SELECT name FROM " . self::TABLE_CATEGORY);
 
-        $statement->execute();
-        return (int)$this->pdo->lastInsertId();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }

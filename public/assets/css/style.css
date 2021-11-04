@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(185, 176, 224);
+    background-color: rgb(182, 177, 177)
 }
 
 .container {
@@ -22,7 +22,7 @@ button {
     
 }
 .annonce {
-    background-color: rgb(221, 153, 221) ;
+    background-color: rgb(153, 63, 153);
 color: white;
 border-style: solid;
     border-width: 1px;
@@ -30,24 +30,25 @@ border-style: solid;
 }
 .container1 {
     background-color: rgb(44, 42, 42);
-    border: rgb(221, 153, 221) ;
+    border: 94447C;
     border-style: solid;
     border-width: 1px;
     padding: 5px;
     width: 150px;
+    border-color:rgb(153, 63, 153) ;
     
     
    
     
 }
 .nav-link1 {
-    color:rgb(221, 153, 221) ;
+    color:rgb(153, 63, 153);
     text-decoration: none;
     
 }
 
 .container2 {
-    background-color: rgb(221, 153, 221) ;
+    background-color: rgb(153, 63, 153);
     padding: 5px;
     width: 150px;
     margin-right: 5px;

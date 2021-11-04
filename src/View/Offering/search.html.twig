@@ -34,8 +34,9 @@
 					<input type="submit" value="Search">
 				</form>
 			</div>
-			<div class='mx-auto col-md-8 col-lg-6'>
-				{% if offers %}
+			{% if offers %}
+				<div class='mx-auto col-md-8 col-lg-6'>
+
 
 					<h3 class="mt-4">Résultats:</h3>
 					{% for offer in offers %}
@@ -53,8 +54,9 @@
 
 					{% endfor %}
 
-				{% endif %}
-			</div>
+
+				</div>
+			{% endif %}
 		</div>
 
 

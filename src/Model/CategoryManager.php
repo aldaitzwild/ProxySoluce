@@ -3,8 +3,10 @@
 namespace App\Model;
 
 class CategoryManager extends AbstractManager
-{
+{ 
     public const TABLE = 'category';
+
+    
 
     public function insert(array $category): int
     {

@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Model\OfferingManager;
-use App\Model\CategoryManager;
 
 class OfferingController extends AbstractController
 {
@@ -11,13 +10,14 @@ class OfferingController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // clean $_POST data
-            $offering = $category = array_map('trim', $_POST);
+            $offering = array_map('trim', $_POST);
             // TODO validations (length, format...)
+            $offering = array_map('htmlentities', $offering);
+            $offering = array_map('stripslashes', $offering);
+
+
 
             // if validation is ok, insert and redirection
-
-            $categoryManager = new CategoryManager();
-            $categoryManager->insert($category);
 
             $offeringManager = new OfferingManager();
             $offeringManager->insert($offering);
@@ -26,5 +26,5 @@ class OfferingController extends AbstractController
         }
 
         return $this->twig->render('offering/add.html.twig');
-    }
+    }    
 }

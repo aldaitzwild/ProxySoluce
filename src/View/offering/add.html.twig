@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Offres</title>
-</head>
-<body>
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+	{# include css files for boostrap from CDN#}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+    <main class="container">
     <h1>Ajouter une nouvelle offre</h1>
 
     <form method="post">
@@ -14,13 +12,13 @@
             <p>
                 <label for="category-select">Choisir une catégorie</label>
 
-                <select name="name" id="category-select">
+                <select name="category_id" id="category-select">
                     <option value="">Choisir une catégorie (obligatoire)</option>
-                    <option value="bricolage">Bricolage</option>
-                    <option value="jardinage">Jardinage</option>
-                    <option value="plomberie">Plomberie</option>
-                    <option value="electricité">Electricité</option>
-                    <option value="service à la personne">Service à la personne</option>
+                    <option value="1">Bricolage</option>
+                    <option value="2">Jardinage</option>
+                    <option value="3">Plomberie</option>
+                    <option value="4">Electricité</option>
+                    <option value="5">Service à la personne</option>
                 </select>
             </p>
 
@@ -31,7 +29,7 @@
 
             <p>
                 <label for="description">Description de l'offre</label>
-                <textarea name="description" id="desciption" cols="50" rows="20"></textarea>
+                <textarea name="description" id="desciption" cols="20" rows="10"></textarea>
             </p>
 
             
@@ -54,7 +52,4 @@
 
 
     </form>
-
-
-</body>
-</html>
+{% endblock %}

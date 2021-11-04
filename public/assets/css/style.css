@@ -1,0 +1,13 @@
+
+:root{
+    --primary-color: #c4c4c4;;
+    --secondary-color: #FBFBFB;
+    --fill-color : #0e1212;
+    --purple : #94447C;
+    --bg-light : radial-gradient(var(--primary-color),transparent,var(--purple) 130%);
+}
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}

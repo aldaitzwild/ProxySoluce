@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row g-1 align-items-center">
+    <div class="col-12 form-floating mb-1 form">
+        <input class="form-control" type="text"  placeholder="Utilisateur" name="user" id="floatingInput" required>
+        <label for="floatingInput" class="label">Utilisateur :</label>
+    </div>
+    <div class=""> 
+        <!-- erreurs  -->
+    </div>
+</div>
+
+<div class="row g-1 align-items-center">
+    <div class="col-12 form-floating mb-1">
+        <input class="form-control" type="password" placeholder="Votre mot de passe" name="pass" id="floatingInput" required>
+        <label for="floatingInput">Mot de passe</label>
+    </div>
+    <div class=""> 
+        <!-- erreurs  -->
+    </div>
+</div>
+
+{% endblock %}  

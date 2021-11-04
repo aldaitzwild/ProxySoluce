@@ -14,49 +14,29 @@ class OfferingController extends AbstractController
         $offeringManager = new OfferingManager();
 
         $categories = $offeringManager->getAllCategories();
+        $params = ['categories' => $categories];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];
-            $category = null;
-            $city = null;
+
+            $data = array_map('trim', $_POST);
 
             if (!isset($_POST['category'])) {
                 $errors[] = "Choisissez une catégorie";
-            } else {
-                $category = $_POST['category'];
             }
             if (!isset($_POST['city']) || strlen(trim($_POST['city'])) === 0) {
                 $errors[] = "Précisez la ville";
-            } else {
-                $city = $_POST['city'];
             }
 
             if (count($errors) === 0) {
-                $offersByCategory = $offeringManager->selectByCategory($category, $city);
+                $offersByCategory = $offeringManager->selectByCategory($data);
 
-                return $this->twig->render(
-                    'Offering/search.html.twig',
-                    [
-                        'categories' => $categories,
-                        'offers' => $offersByCategory
-                    ]
-                );
+                $params['offers'] = $offersByCategory;
             } else {
-                return $this->twig->render(
-                    'Offering/search.html.twig',
-                    [
-                        'categories' => $categories,
-                        'errors' => $errors
-                    ]
-                );
+                $params['errors'] = $errors;
             }
-        } else {
-            return $this->twig->render(
-                'Offering/search.html.twig',
-                [
-                    'categories' => $categories,
-                ]
-            );
         }
+
+        return $this->twig->render('Offering/search.html.twig', $params);
     }
 }

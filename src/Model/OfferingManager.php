@@ -6,11 +6,9 @@ use PDO;
 
 class OfferingManager extends AbstractManager
 {
-    public const TABLE_OFFERING = 'offering';
-    public const TABLE_DOING = 'doing';
-    public const TABLE_PERSON = 'person';
-    public const TABLE_CATEGORY = 'category';
-    public const TABLE_SKILL = 'skill';
+    private const TABLE_OFFERING = 'offering';
+    private const TABLE_PERSON = 'person';
+    private const TABLE_CATEGORY = 'category';
 
     public function selectByCategory(array $data): array
     {
@@ -24,20 +22,6 @@ class OfferingManager extends AbstractManager
         $statement->execute();
 
         return $statement->fetchAll();
-    }
-
-    public function getAllCategories(): array
-    {
-        $statement = $this->pdo->query("SELECT name FROM " . self::TABLE_CATEGORY);
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
-    }
-
-    public function getAllSkills(): array
-    {
-        $statement = $this->pdo->query("SELECT name FROM " . self::TABLE_SKILL);
-
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
     private function formatCity(string $city): string

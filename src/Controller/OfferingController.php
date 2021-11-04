@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
 use App\Model\OfferingManager;
 
 class OfferingController extends AbstractController
@@ -12,8 +13,9 @@ class OfferingController extends AbstractController
     public function search(): string
     {
         $offeringManager = new OfferingManager();
+        $categoryManager = new CategoryManager();
 
-        $categories = $offeringManager->getAllCategories();
+        $categories = $categoryManager->getAllCategories();
         $params = ['categories' => $categories];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

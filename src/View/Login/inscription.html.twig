@@ -1,0 +1,81 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+            <form  method="POST" enctype="multipart/form-data">
+                <h1> Test inscription</h1>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="text" placeholder="Entrer le prénom" name="name" value="{{ register.name }}"  required>
+                            <div class=""> 
+                                {{ errors.name }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="text" placeholder="Entrer le nom" name="firstname" value="{{ register.firstname }}"  required>
+                            <div class=""> 
+                                {{ errors.firstname }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="email" placeholder="Entrez votre e-mail" name="mail" value="{{ register.mail }}"  required>
+                            <div class=""> 
+                                {{ errors.mail }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="date" placeholder="Date de naissance" name="birth" value="{{ register.birth }}" required>
+                            <div class=""> 
+                                {{ errors.birth }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="file"></label>
+                        <input class="form-control" type="file"  name="picture">
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="text" placeholder="Entrer le nom d'utilisateur" name="user" value="{{ register.user }}" required>
+                            <div class=""> 
+                                {{ errors.user }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="password" placeholder="Entrer le mot de passe" name="pass" required>
+                            <div class=""> 
+                                {{ errors.pass }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="password" placeholder="Confirmez votre mot de pass" name="confirm" required>
+                    </div>
+                    <div class="form-group">
+                        <label for=""><p></p></label>
+                        <input class="form-control" type="text" placeholder="Adresse" name="adress" value="{{ register.adress }}" required>
+                            <div class=""> 
+                                {{ errors.adress }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""><p></p></label>
+                        <input class="form-control" type="number" placeholder="Code postal" name="postal" value="{{ register.postal }}" required>
+                            <div class=""> 
+                                {{ errors.postal }} 
+                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label for=""></label>
+                        <input class="form-control" type="text" placeholder="Ville" name="town" value="{{ register.town }}" required>
+                            <div class=""> 
+                                {{ errors.town }} 
+                            </div>
+                    </div>
+                    <button type="submit" class="form-control"> Submit</button>
+            </form>
+
+{% endblock %}  

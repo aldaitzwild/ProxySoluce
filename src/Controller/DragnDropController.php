@@ -8,7 +8,6 @@ class DragnDropController extends AbstractController
 {
     public function index()
     {
-
         $skillManager = new SkillManager();
         $skills = $skillManager->selectAll();
 

@@ -8,37 +8,41 @@ use App\Model\CategoryManager;
 class OfferingController extends AbstractController
 {
     public function add(): string
-    {
+    {   $errors = [];
+
         $offeringManager = new OfferingManager();
         $categoryManager = new CategoryManager();
 
-        $categories = $categoryManager->getAllCategories();
-        $params = ['categories' => $categories];
-
+        $categories = $categoryManager->selectAll();
+       
         if ($_SERVER['REQUEST_METHOD'] === 'POST') 
-        {
-            $errors = [];
-
-            $data = array_map('trim', $_POST);
-
-            if (!isset($_POST['category'])) {
-                $errors[] = "Choisissez une catégorie";
-            }
-            if (!isset($_POST['city']) || strlen(trim($_POST['city'])) === 0) {
-                $errors[] = "Précisez la ville";
-            }else {
-                $params['errors'] = $errors;
-
-            } 
+        {   $offering = array_map('trim', $_POST);
+            $offering = array_map('htmlentities', $offering);
+            $offering = array_map('stripslashes', $offering);
             
+            if (empty($_POST['description'])){
+                $errors['description'] = "Veuillez remplir la partie description";
+            }
 
-            $offering=$data;
-            $offeringManager = new OfferingManager();
+            if (empty($_POST['title'])){
+                $errors['title'] = "Veuillez remplir la partie titre";
+            }
+
+            if (empty($_POST['city'])){
+                $errors['city'] = "Veuillez remplir la partie ville";
+            }
+
+            if (!empty($errors)) {
+                return $this->twig->render('offering/add.html.twig', [
+                    'errors' => $errors,
+                    'categories' => $categories
+                ]);
+            }
+           
             $offeringManager->insert($offering);
-
-        
         }
-            return $this->twig->render('offering/add.html.twig', $params);
+         
+        return $this->twig->render('offering/add.html.twig', ['categories' => $categories]);
     }
 }    
 
@@ -46,23 +50,4 @@ class OfferingController extends AbstractController
 
 
 
-/*
-            // clean $_POST data
-            $offering = array_map('trim', $_POST);
-            
-            // TODO validations (length, format...)
-            $offering = array_map('htmlentities', $offering);
-            $offering = array_map('stripslashes', $offering);
-            
-            
-            
 
-            // if validation is ok, insert and redirection
-            $offeringManager = new OfferingManager();
-            $offeringManager->insert($offering);
-
-            header('Location:/offering/add');
-        }
-
-        return $this->twig->render('offering/add.html.twig');
-    }*/

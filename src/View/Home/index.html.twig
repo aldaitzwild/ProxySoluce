@@ -1,5 +1,28 @@
-{% extends 'layout.html.twig' %}
+{% extends 'welcome.html.twig' %}
 
 {% block content %}
-    <h1>Hello Wilder !</h1>
+    
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+
+       <a href="#" class="navbar-brand BOOTSTRAP logo">ProxySoluce</a>
+
+       
+       <div class=" btn-group collapse navbar-collapse " >
+
+         <div class=" navbar-nav m-auto BOOTSTRAP container  ">
+         
+            <button class="BOOTSTRAP container1 btn-lg d-grid gap-1 col-4 mx-2"> 
+             <a href="#" class="nav-link1 ">Connexion</a>
+            </button>
+
+           <button class="BOOTSTRAP container2 btn-lg d-grid gap-1 col-4 mx-2"> 
+             <a href="#" class="nav-link2 ">Déconnexion</a>
+            </button>
+           
+         
+       </div>
+        </div>
+        
+   </nav>
+</body>
 {% endblock %}

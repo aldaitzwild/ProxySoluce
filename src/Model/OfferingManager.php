@@ -11,7 +11,8 @@ class OfferingManager extends AbstractManager
 
     public function selectByCategory(array $data): array
     {
-        $statement = $this->pdo->prepare("SELECT p.name, p.forname, o.title, o.city, o.description, c.name AS category
+        $statement = $this->pdo->prepare("SELECT p.firstname,
+        p.lastname, o.title, o.city, o.description, c.name AS category
         FROM " . self::TABLE . " AS o
         JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
         JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id

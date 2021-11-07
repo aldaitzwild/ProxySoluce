@@ -20,7 +20,6 @@ class DragnDropController extends AbstractController
             'informatique' => 'Informatique',
             'menage' => 'Ménage',
             'repassage' => 'Repassage'
-
         ];
 
 

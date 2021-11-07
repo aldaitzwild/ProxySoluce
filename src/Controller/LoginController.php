@@ -18,9 +18,6 @@ class LoginController extends AbstractController
             } else {
                 echo "not ok";
             }
-                var_dump($_POST);
-                var_dump($infos);
-                //header('location:/welcome');
         }
         return $this->twig->render('Login/login.html.twig');
     }

@@ -9,6 +9,8 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
+
 class HomeController extends AbstractController
 {
     /**
@@ -21,6 +23,9 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Home/index.html.twig', [categorie => $categories]);/*render = demander à twig de traduire la page*/ 
-    }
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+    return $this->twig->render('Home/index.html.twig', ["categories" => $categories]);/*render = demander à twig de traduire la page*/ 
+   
+}
 }

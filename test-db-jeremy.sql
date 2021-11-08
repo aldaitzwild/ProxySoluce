@@ -35,8 +35,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proxysoluce`.`person` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(100) NOT NULL,
-  `forname` VARCHAR(100) NOT NULL,
+  `firstname` VARCHAR(100) NOT NULL,
+  `lastname` VARCHAR(100) NOT NULL,
   `birth_date` DATE NOT NULL,
   `mail` VARCHAR(255) NOT NULL,
   `password` VARCHAR(255) NOT NULL,
@@ -129,16 +129,16 @@ INSERT INTO skill (name) VALUES ('jardinage'), ('maconnerie'), ('mecanique'), ('
 INSERT INTO category (name) VALUES ('service à la personne'), ('bricolage'), ('informatique'), ('catégorie4'), ('catégorie5');
 
 INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Lyon');
-INSERT INTO person (name, forname, birth_date, mail, password, login, address_id) VALUES ('Gautrais', 'Jérémy', '1990-05-09', 'j.gautrais@compagnies.com', 'Jeremy', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Gautrais', 'Jérémy', '1990-05-09', 'j.gautrais@compagnies.com', 'Jeremy', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
 INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Oullins');
-INSERT INTO person (name, forname, birth_date, mail, password, login, address_id) VALUES ('Verchere', 'Anthony', '1990-05-09', 'anthony@compagnies.com', 'Anthony', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Verchere', 'Anthony', '1990-05-09', 'anthony@compagnies.com', 'Anthony', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
 INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Grenoble');
-INSERT INTO person (name, forname, birth_date, mail, password, login, address_id) VALUES ('Gaudin', 'Valentin', '1990-05-09', 'valentin@compagnies.com', 'Valentin', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Gaudin', 'Valentin', '1990-05-09', 'valentin@compagnies.com', 'Valentin', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
 INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Lyon');
-INSERT INTO person (name, forname, birth_date, mail, password, login, address_id) VALUES ('Hoffman', 'Michel', '1990-05-09', 'michel@compagnies.com', 'Michel', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Hoffman', 'Michel', '1990-05-09', 'michel@compagnies.com', 'Michel', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
 INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Gautrais"), (SELECT id FROM skill WHERE name="informatique"));
 INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Verchere"), (SELECT id FROM skill WHERE name="plomberie"));

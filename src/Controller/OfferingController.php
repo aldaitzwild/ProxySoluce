@@ -12,9 +12,11 @@ class OfferingController extends AbstractController
         $offeringManager = new OfferingManager();
         $categoryManager = new CategoryManager();
 
+        $categories = $categoryManager->selectAll();
+
         $errors = [];
 
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $offering = array_map('trim', $_POST);
             $offering = array_map('stripslashes', $offering);
 
@@ -75,8 +77,6 @@ class OfferingController extends AbstractController
                 $params['errors'] = $errors;
             }
         }
-
         return $this->twig->render('Offering/search.html.twig', $params);
-
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Model;
 
 class OfferingManager extends AbstractManager
-{       
+{
     public const TABLE_PERSON = 'person';
     public const TABLE = 'offering';
 
@@ -37,6 +37,5 @@ class OfferingManager extends AbstractManager
     private function formatCity(string $city): string
     {
         return ucfirst(strtolower($city));
-
     }
 }

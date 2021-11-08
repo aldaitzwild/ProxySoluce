@@ -21,6 +21,6 @@ class HomeController extends AbstractController
      */
     public function index()
     {
-        return $this->twig->render('Home/welcome.html.twig');/*render = demander à twig de traduire la page*/ 
+        return $this->twig->render('Home/index.html.twig', [categorie => $categories]);/*render = demander à twig de traduire la page*/ 
     }
 }

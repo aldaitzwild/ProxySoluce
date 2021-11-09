@@ -19,6 +19,7 @@ return [
     'items/delete' => ['ItemController', 'delete',],
     'dragndrop' => ['DragnDropController', 'index'],
     'offering/add' => ['OfferingController', 'add'],
-    'offerings/search' => ['OfferingController', 'search']
+    'offerings/search' => ['OfferingController', 'search'],
+    'offerings/show' => ['OfferingController', 'show', ['id']],
 
 ];

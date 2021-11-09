@@ -2,26 +2,14 @@
 
 namespace App\Controller;
 
+use App\Model\SkillManager;
+
 class DragnDropController extends AbstractController
 {
     public function index()
     {
-        $skills = [
-            'jardinage' => 'Jardinage',
-            'maconnerie' => 'Maçonnerie',
-            'mecanique' => 'Mécanique',
-            'menuiserie' => 'Menuiserie',
-            'montage-meuble' => 'Montage de meuble',
-            'plomberie' => 'Plomberie',
-            'electricite' => 'Electricité',
-            'carrelage' => 'Carrelage',
-            'carrosserie' => 'Carrosserie',
-            'electronique' => 'Electronique',
-            'informatique' => 'Informatique',
-            'menage' => 'Ménage',
-            'repassage' => 'Repassage'
-        ];
-
+        $skillManager = new SkillManager();
+        $skills = $skillManager->selectAll();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['skill'])) {
             $selected = [];

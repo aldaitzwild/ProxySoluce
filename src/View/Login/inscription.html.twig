@@ -1,81 +1,123 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
+    <div class="inscription">
+        <form class="row g-1 form" method="POST" enctype="multipart/form-data">
 
-            <form  method="POST" enctype="multipart/form-data">
-                <h1> Test inscription</h1>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="text" placeholder="Entrer le prénom" name="firstname" value="{{ register.name }}"  required>
-                            <div class=""> 
-                                {{ errors.name }} 
-                            </div>
+            <h1>Création de votre profil</h1>
+                <p>Bonjour</p>
+
+                {# Dois être dans une bulle en haut a droite avec un bouton + #}
+                <div class="row g-2 align-items-center">
+                    <label for="file">Photo de profil :</label>
+                <input class="form-control" type="file"  name="picture" placeholder="Votre prénom">
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1 form">
+                        <input class="form-control" type="text"  placeholder="Votre prénom" name="name" id="floatingInput" value="{{ register.name }}"  required>
+                        <label for="floatingInput" class="label">Prénom :</label>
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="text" placeholder="Entrer le nom" name="lastname" value="{{ register.firstname }}"  required>
-                            <div class=""> 
-                                {{ errors.firstname }} 
-                            </div>
+                    <div class=""> 
+                        {{ errors.name }} 
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="email" placeholder="Entrez votre e-mail" name="mail" value="{{ register.mail }}"  required>
-                            <div class=""> 
-                                {{ errors.mail }} 
-                            </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="text" placeholder="Votre nom" name="firstname" id="floatingInput" value="{{ register.firstname }}"  required>
+                        <label for="floatingInput">Nom de famille :</label>
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="date" placeholder="Date de naissance" name="birth" value="{{ register.birth }}" required>
-                            <div class=""> 
-                                {{ errors.birth }} 
-                            </div>
+                    <div class=""> 
+                        {{ errors.firstname }} 
                     </div>
-                    <div class="form-group">
-                        <label for="file"></label>
-                        <input class="form-control" type="file"  name="picture">
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="email" placeholder="Entrez votre e-mail" name="mail" id="floatingInput" value="{{ register.mail }}"  required>
+                        <label for="floatingInput">E-mail :</label>
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="text" placeholder="Entrer le nom d'utilisateur" name="user" value="{{ register.user }}" required>
-                            <div class=""> 
-                                {{ errors.user }} 
-                            </div>
+                    <div class=""> 
+                        {{ errors.mail }} 
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="password" placeholder="Entrer le mot de passe" name="pass" required>
-                            <div class=""> 
-                                {{ errors.pass }} 
-                            </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12">
+                        <label for=""> Date de naissance :</label>
+                        <input class="form-control" type="date" placeholder="Date de naissance" name="birth" i value="{{ register.birth }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="password" placeholder="Confirmez votre mot de pass" name="confirm" required>
+                    <div class=""> 
+                        {{ errors.birth }} 
                     </div>
-                    <div class="form-group">
-                        <label for=""><p></p></label>
-                        <input class="form-control" type="text" placeholder="Adresse" name="adress" value="{{ register.adress }}" required>
-                            <div class=""> 
-                                {{ errors.adress }} 
-                            </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="text" placeholder="Entrer le nom d'utilisateur" name="user" id="floatingInput" value="{{ register.user }}" required>
+                        <label for="floatingInput">Nom d'utilisateur :</label>
                     </div>
-                    <div class="form-group">
-                        <label for=""><p></p></label>
-                        <input class="form-control" type="number" placeholder="Code postal" name="postal" value="{{ register.postal }}" required>
-                            <div class=""> 
-                                {{ errors.postal }} 
-                            </div>
+                    <div>
+                        {{ errors.user }} 
                     </div>
-                    <div class="form-group">
-                        <label for=""></label>
-                        <input class="form-control" type="text" placeholder="Ville" name="town" value="{{ register.town }}" required>
-                            <div class=""> 
-                                {{ errors.town }} 
-                            </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" aria-describedby="passwordHelpInline" type="password" placeholder="Votre mot de passe" name="pass" id="floatingInput" required>
+                        <label for="floatingInput">Mot de passe :</label>
+                            <span id="passwordHelpInline" class="form-text">
+                                Dois avoir 8 caractères, 1 majuscule et 1 chiffre.
+                            </span>
                     </div>
-                    <button type="submit" class="form-control"> Submit</button>
-            </form>
+                    <div class=""> 
+                        {{ errors.pass }} 
+                    </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                            <input class="form-control" type="password" placeholder="Confirmez votre mot de passe" name="confirm" id="floatingInput" required>
+                            <label for="floatingInput">Confirmation :</label>
+                    </div>
+                    <div class=""> 
+                        {{ errors.confirm }} 
+                    </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="text" placeholder="Adresse" name="adress" id="floatingInput" value="{{ register.adress }}" required>
+                        <label for="floatingInput">Adresse :</label>
+                    </div>
+                    <div class=""> 
+                        {{ errors.adress }} 
+                    </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="number" placeholder="Code postal" name="postal" id="floatingInput" value="{{ register.postal }}" required>
+                        <label for="floatingInput">Code postal :</label>
+                    </div>
+                    <div class=""> 
+                        {{ errors.postal }} 
+                    </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" type="text" placeholder="Ville" name="town" id="floatingInput" value="{{ register.town }}" required>
+                        <label for="floatingInput">Ville :</label>
+                    </div>
+                    <div class=""> 
+                        {{ errors.town }} 
+                    </div>
+                </div>
+
+            <button type="submit" class="btn btn-outline-success col-12">Enregister</button>
+        </form>
+    </div>
 
 {% endblock %}  

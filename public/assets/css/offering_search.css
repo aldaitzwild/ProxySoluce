@@ -1,0 +1,11 @@
+input,
+select {
+  max-width: 11rem;
+  border-width: 2px;
+  border-radius: 2rem;
+  padding: 0.6rem 2rem;
+}
+
+input[type='submit'] {
+  padding: 0.6rem 4rem;
+}

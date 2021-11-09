@@ -1,6 +1,5 @@
-
 :root{
-    --primary-color: #c4c4c4;;
+    --primary-color: #c4c4c4;
     --secondary-color: #FBFBFB;
     --fill-color : #0e1212;
     --purple : #94447C;
@@ -11,3 +10,9 @@
     margin: 0px;
     box-sizing: border-box;
 }
+.style{
+    background-color: var(--secondary-color);
+}
+
+
+

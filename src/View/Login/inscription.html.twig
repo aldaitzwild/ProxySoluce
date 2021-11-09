@@ -1,13 +1,12 @@
 {% extends 'layout.html.twig' %}
-
-
-
+{% block stylesheet %}
+<link rel="stylesheet" href="/assets/css/_form.css">
+{% endblock %}
 {% block content %}
     <div class="inscription">
         <form class="row g-1 form" method="POST" enctype="multipart/form-data">
 
             <h1 class="fs-1 p-2 g-1">Création de votre profil</h1>
-                <p class="fs-3 ps-5">Bonjour</p>
 
                 <div class="row g-2 align-items-center">
                     <label for="file">Photo de profil :</label>

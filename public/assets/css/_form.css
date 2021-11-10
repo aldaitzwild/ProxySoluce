@@ -6,9 +6,6 @@
     --bg-light : radial-gradient(var(--primary-color),transparent,var(--purple) 130%);
 }
 .inscription{
-    display: block;
-    align-items: center;
-    justify-content: center;
     background-color: var(--secondary-color);
     border: 2px solid black;
     box-shadow: var(--fill-color) 5px 10px 20px;

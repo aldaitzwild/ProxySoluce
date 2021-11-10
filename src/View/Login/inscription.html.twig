@@ -1,13 +1,13 @@
 {% extends 'layout.html.twig' %}
-
+{% block stylesheet %}
+<link rel="stylesheet" href="/assets/css/_form.css">
+{% endblock %}
 {% block content %}
     <div class="inscription">
         <form class="row g-1 form" method="POST" enctype="multipart/form-data">
 
-            <h1>Création de votre profil</h1>
-                <p>Bonjour</p>
+            <h1 class="fs-1 p-2 g-1">Création de votre profil</h1>
 
-                {# Dois être dans une bulle en haut a droite avec un bouton + #}
                 <div class="row g-2 align-items-center">
                     <label for="file">Photo de profil :</label>
                 <input class="form-control" type="file"  name="picture" placeholder="Votre prénom">
@@ -15,7 +15,7 @@
 
                 <div class="row g-1 align-items-center">
                     <div class="col-12 form-floating mb-1 form">
-                        <input class="form-control" type="text"  placeholder="Votre prénom" name="name" id="floatingInput" value="{{ register.name }}"  required>
+                        <input class="form-control" type="text"  placeholder="Votre prénom" name="firstname" id="floatingInput" value="{{ register.firstname }}"  required>
                         <label for="floatingInput" class="label">Prénom :</label>
                     </div>
                     <div class=""> 
@@ -25,7 +25,7 @@
 
                 <div class="row g-1 align-items-center">
                     <div class="col-12 form-floating mb-1">
-                        <input class="form-control" type="text" placeholder="Votre nom" name="firstname" id="floatingInput" value="{{ register.firstname }}"  required>
+                        <input class="form-control" type="text" placeholder="Votre nom" name="lastname" id="floatingInput" value="{{ register.lastname }}"  required>
                         <label for="floatingInput">Nom de famille :</label>
                     </div>
                     <div class=""> 
@@ -116,8 +116,6 @@
                     </div>
                 </div>
 
-            <button type="submit" class="btn btn-outline-success col-12">Enregister</button>
+            <button type="submit" class="btn btn-outline-success col-12">Suivant</button>
         </form>
     </div>
-
-{% endblock %}  

@@ -95,12 +95,12 @@ class OfferingController extends AbstractController
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
-            $from = $data['email'];
+            $visitorEmail = $data['email'];
             $offerTitle = $data['title'];
 
             $errors = [];
 
-            if (!filter_var($from, FILTER_VALIDATE_EMAIL)) {
+            if (!filter_var($visitorEmail, FILTER_VALIDATE_EMAIL)) {
                 $errors[] = "Invalid email format";
             }
 
@@ -119,7 +119,7 @@ class OfferingController extends AbstractController
                 $headers .= 'From: <enquiry@example.com>' . "\r\n";
 
                 mail($recipient, $subject, $message, $headers);
-                mail($from, $subjectSender, $messageSender, $headers);
+                mail($visitorEmail, $subjectSender, $messageSender, $headers);
 
                 $params['success'] = 'Message sent. Thank you.';
             }

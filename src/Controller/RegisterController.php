@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\RegisterManager;
+use App\Model\SkillManager;
 
 class RegisterController extends AbstractController
 {
@@ -34,8 +35,10 @@ class RegisterController extends AbstractController
                 ]);
             }
             $registerManager = new RegisterManager();
-            $registerManager->insert($register);
-            header('Location:/welcome');
+            $userId = $registerManager->insert($register);
+            $skillManager = new SkillManager();
+            $skills = $skillManager->selectAll();
+            return $this->twig->render('DragnDrop/index.html.twig', ['skills' => $skills ,'userId' => $userId]);
         }
         return $this->twig->render('Login/inscription.html.twig');
     }
@@ -83,6 +86,6 @@ class RegisterController extends AbstractController
     public function regexUser($user): bool
     {
         return !filter_var($user, FILTER_VALIDATE_REGEXP, array (
-            "options" => array ("regexp" => "/^[A-Za-z][A-Za-z0-9]{5,31}$/")));
+            "options" => array ("regexp" => "/^[A-Za-z][A-Za-z0-9]{4,31}$/")));
     }
 }

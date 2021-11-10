@@ -1,6 +1,14 @@
+body {
+  background-color: lightgray !important;
+}
+
+.container {
+  border-radius: 1rem;
+}
+
 input,
 select {
-  max-width: 11rem;
+  max-width: 12rem;
   border-width: 2px;
   border-radius: 2rem;
   padding: 0.6rem 2rem;
@@ -8,4 +16,13 @@ select {
 
 input[type='submit'] {
   padding: 0.6rem 4rem;
+}
+
+.search_form,
+.offer {
+  border-radius: 1.5rem;
+}
+
+.alert-warning {
+  border-radius: 1rem !important;
 }

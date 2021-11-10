@@ -71,12 +71,60 @@ class OfferingController extends AbstractController
 
             if (count($errors) === 0) {
                 $offersByCategory = $offeringManager->selectByCategory($data);
-
+                if (count($offersByCategory) === 0) {
+                    $params['empty'] = 'No offers available for this request.';
+                }
                 $params['offers'] = $offersByCategory;
             } else {
                 $params['errors'] = $errors;
             }
         }
         return $this->twig->render('Offering/search.html.twig', $params);
+    }
+
+    /* Display offer */
+
+    public function show(int $id): string
+    {
+        $params = [];
+        $offeringManager = new OfferingManager();
+        $offer = $offeringManager->selectOfferById($id);
+        $params['offer'] = $offer;
+
+
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = array_map('trim', $_POST);
+            $visitorEmail = $data['email'];
+            $offerTitle = $data['title'];
+
+            $errors = [];
+
+            if (!filter_var($visitorEmail, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = "Invalid email format";
+            }
+
+            if (count($errors) > 0) {
+                $params['errors'] = $errors;
+            } else {
+                $recipient = $offer['mail'];
+                $subject = "Demande de contact pour votre annonce: $offerTitle";
+                $subjectSender = "Demande de contact pour votre annonce: $offerTitle";
+
+                $message = $data['message'];
+                $messageSender = "Here is a copy of your message \n" . $message;
+
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                $headers .= 'From: <enquiry@example.com>' . "\r\n";
+
+                mail($recipient, $subject, $message, $headers);
+                mail($visitorEmail, $subjectSender, $messageSender, $headers);
+
+                $params['success'] = 'Message sent. Thank you.';
+            }
+        }
+
+        return $this->twig->render('Offering/show.html.twig', $params);
     }
 }

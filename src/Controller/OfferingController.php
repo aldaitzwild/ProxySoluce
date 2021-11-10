@@ -33,7 +33,7 @@ class OfferingController extends AbstractController
             }
 
             if (!empty($errors)) {
-                return $this->twig->render('offering/add.html.twig', [
+                return $this->twig->render('Offering/add.html.twig', [
                     'errors' => $errors,
                     'categories' => $categories
                 ]);
@@ -42,7 +42,7 @@ class OfferingController extends AbstractController
             $offeringManager->insert($offering);
         }
 
-        return $this->twig->render('offering/add.html.twig', ['categories' => $categories]);
+        return $this->twig->render('Offering/add.html.twig', ['categories' => $categories]);
     }
 
     /**

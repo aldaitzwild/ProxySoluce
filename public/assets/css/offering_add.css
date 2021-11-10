@@ -46,3 +46,6 @@ section{
     color: var(--secondary-color) !important;
 }
 
+#session {
+    display:none;
+}

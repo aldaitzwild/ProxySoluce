@@ -126,7 +126,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 INSERT INTO skill (name) VALUES ('jardinage'), ('maconnerie'), ('mecanique'), ('menuiserie'), ('montage-meuble'), ('plomberie'), ('electricite'), ('carrelage'), ('carrosserie'), ('electronique'), ('informatique'), ('menage'), ('repassage');
-INSERT INTO category (name) VALUES ('service à la personne'), ('bricolage'), ('informatique'), ('catégorie4'), ('catégorie5');
+INSERT INTO category (name) VALUES ('plomberie'), ('bricolage'), ('demenagement'), ('pose_cuisine');
 
 INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Lyon');
 INSERT INTO person (name, forname, birth_date, mail, password, login, address_id) VALUES ('Gautrais', 'Jérémy', '1990-05-09', 'j.gautrais@compagnies.com', 'Jeremy', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));

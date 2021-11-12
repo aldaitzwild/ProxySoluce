@@ -21,11 +21,14 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function home()
     {
+        
         $categoryManager = new CategoryManager();
-        $categories = $categoryManager->selectAll();
-    return $this->twig->render('Home/index.html.twig', ["categories" => $categories]);/*render = demander à twig de traduire la page*/ 
-   
+         $categories = $categoryManager->selectAll();
+    return $this->twig->render('Home/home.html.twig', ['categories' => $categories]);/*render = demander à twig de traduire la page*/ 
 }
+
 }
+
+

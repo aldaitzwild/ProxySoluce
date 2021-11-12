@@ -1,0 +1,57 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}accueil{% endblock %}
+    
+
+{% block content %} 
+
+<div class = "backgroundPage">
+  <div id="carouselExampleFade" class="BOOTSTRAP carousel carousel slide carousel-fade BOOTSTRAP carousel" data-bs-ride="carousel">
+  <div class="carousel-inner ">
+  
+
+    <div class=" carousel-item active ">
+      <img src="/assets/images/carousel1.png" class=" " alt="...">
+      <div class="BOOTSTRAP texte_centrer">De vrais bricoleurs <br> pour vous aider</div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="/assets/images/carousel2.png" class="" alt="...">
+      <div class="BOOTSTRAP texte_centrer">100% confiance</div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="/assets/images/carousel3.png" class="" alt="...">
+      <div class="BOOTSTRAP texte_centrer">Satisfait ou refait</div>
+    </div>
+
+    <div class="carousel-item">
+      <img src="/assets/images/carousel4.png" class="" alt="...">
+      <div class="BOOTSTRAP texte_centrer">Assurance comprise</div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<div class="annonces">
+   <button class="btn-lg  BOOTSTRAP annonce">Que recherchez-vous? <br> Voir les annonces </button>
+</div>
+
+   <div class="container3">   
+      <div class="row">
+    
+    {% for categorie in categories %}
+        <div class=" col-lg-4 col-md-6 mb-9 mb-lg-0 BOOTSTRAP container4">
+            <a href="{{categorie.image1}}" class="thumbnail">
+                <img src="/assets/images/images1/{{categorie.name}}.png" alt="{{categorie.name}}" class="fluid img-thumbnail w-100 shadow-1-strong rounded mb-4"> 
+                <div class="BOOTSTRAP texte_centrer">{{categorie.name}}</div>
+            </a>
+            
+        </div>
+      {% endfor %} 
+        
+      </div>
+    </div>
+  
+{% endblock %}

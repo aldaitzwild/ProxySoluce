@@ -26,3 +26,7 @@ input[type='submit'] {
 .alert-warning {
   border-radius: 1rem !important;
 }
+
+.offer-title-link:hover {
+  text-decoration: underline !important;
+}

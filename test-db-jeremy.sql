@@ -17,38 +17,23 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 CREATE SCHEMA IF NOT EXISTS `proxysoluce` ;
 USE `proxysoluce` ;
 
--- -----------------------------------------------------
--- Table `proxysoluce`.`address`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proxysoluce`.`address` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `street` VARCHAR(255) NOT NULL,
-  `complement` VARCHAR(255) NULL,
-  `cp` INT NOT NULL,
-  `city` VARCHAR(100) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `proxysoluce`.`person`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proxysoluce`.`person` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `firstname` VARCHAR(100) NOT NULL,
-  `lastname` VARCHAR(100) NOT NULL,
-  `birth_date` DATE NOT NULL,
-  `mail` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `login` VARCHAR(100) NOT NULL,
-  `address_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_person_address_idx` (`address_id` ASC) VISIBLE,
-  CONSTRAINT `fk_person_address`
-    FOREIGN KEY (`address_id`)
-    REFERENCES `proxysoluce`.`address` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  `id` int NOT NULL AUTO_INCREMENT,
+  `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `mail` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `birth` date NOT NULL,
+  `user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `pass` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `adress` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `postal` int NOT NULL,
+  `town` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `picture` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -65,24 +50,14 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `proxysoluce`.`doing`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proxysoluce`.`doing` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `person_id` INT NULL,
-  `skill_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_doing_person1_idx` (`person_id` ASC) VISIBLE,
-  INDEX `fk_doing_skill1_idx` (`skill_id` ASC) VISIBLE,
-  CONSTRAINT `fk_doing_person1`
-    FOREIGN KEY (`person_id`)
-    REFERENCES `proxysoluce`.`person` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_doing_skill1`
-    FOREIGN KEY (`skill_id`)
-    REFERENCES `proxysoluce`.`skill` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
+CREATE TABLE `user_skill` (
+  `person_id` int DEFAULT NULL,
+  `skill_id` int DEFAULT NULL,
+  KEY `person_id` (`person_id`),
+  KEY `skill_id` (`skill_id`),
+  CONSTRAINT `user_skill_ibfk_3` FOREIGN KEY (`person_id`) REFERENCES `person` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE,
+  CONSTRAINT `user_skill_ibfk_4` FOREIGN KEY (`skill_id`) REFERENCES `skill` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
 -- -----------------------------------------------------
@@ -128,29 +103,16 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO skill (name) VALUES ('jardinage'), ('maconnerie'), ('mecanique'), ('menuiserie'), ('montage-meuble'), ('plomberie'), ('electricite'), ('carrelage'), ('carrosserie'), ('electronique'), ('informatique'), ('menage'), ('repassage');
 INSERT INTO category (name) VALUES ('service à la personne'), ('bricolage'), ('informatique'), ('catégorie4'), ('catégorie5');
 
-INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Lyon');
-INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Gautrais', 'Jérémy', '1990-05-09', 'j.gautrais@compagnies.com', 'Jeremy', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
-INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Oullins');
-INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Verchere', 'Anthony', '1990-05-09', 'anthony@compagnies.com', 'Anthony', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Jérémy', 'Gautrais', 'j.gautrais@compagnies.com', '1990-05-09', 'jeremy', 'root', '17 rue Claude Jusseaud', '69110', 'Sainte Foy les Lyon');
 
-INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Grenoble');
-INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Gaudin', 'Valentin', '1990-05-09', 'valentin@compagnies.com', 'Valentin', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Valentin', 'Gaudin', 'v.gaudin@compagnies.com', '1990-05-09', 'valentin', 'root', '1rue du Platane', '32000', 'Grenoble');
 
-INSERT INTO address (street, cp, city) VALUES ('rue de la République', '69002', 'Lyon');
-INSERT INTO person (lastname, firstname, birth_date, mail, password, login, address_id) VALUES ('Hoffman', 'Michel', '1990-05-09', 'michel@compagnies.com', 'Michel', 'root', (SELECT id FROM address WHERE Id=(SELECT LAST_INSERT_ID())));
 
-INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Gautrais"), (SELECT id FROM skill WHERE name="informatique"));
-INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Verchere"), (SELECT id FROM skill WHERE name="plomberie"));
-INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Gaudin"), (SELECT id FROM skill WHERE name="jardinage"));
-INSERT INTO doing (person_id, skill_id) VALUES ((SELECT id FROM person WHERE name="Hoffman"), (SELECT id FROM skill WHERE name="electricite"));
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Développement de sites web', 'Lyon', 'Je vous propose mes services pour développer des sites web interactifs.', (SELECT id FROM person WHERE lastname="Gautrais"), (SELECT id FROM category WHERE name="informatique"));
 
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Développement de sites web', 'Lyon', 'Je vous propose mes services pour développer des sites web interactifs.', (SELECT id FROM person WHERE name="Gautrais"), (SELECT id FROM category WHERE name="informatique"));
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Développement d intranet', 'Lyon', 'Je vous propose mes services pour développer des intranets.', (SELECT id FROM person WHERE name="Hoffman"), (SELECT id FROM category WHERE name="informatique"));
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Taille de haie', 'Grenoble', 'Je vous propose mes services pour tailler des haies.', (SELECT id FROM person WHERE lastname="Gaudin"), (SELECT id FROM category WHERE name="bricolage"));
 
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Taille de haie', 'Grenoble', 'Je vous propose mes services pour tailler des haies.', (SELECT id FROM person WHERE name="Gaudin"), (SELECT id FROM category WHERE name="bricolage"));
-
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Repassage', 'Oullins', 'Je vous propose mes services pour repasser le linge.', (SELECT id FROM person WHERE name="Verchere"), (SELECT id FROM category WHERE name="service à la personne"));
 
 
 

@@ -1,0 +1,35 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <form class="row g-1 form" method="POST">
+            <div class="connexion">
+                <h1 class="fs-1 p-2 g-1">Connexion</h1>
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1 form">
+                        <input class="form-control" type="text" placeholder="Utilisateur" name="user" id="floatingInput" value="{{ infos.user }}" required>
+                        <label for="floatingInput" class="label">Utilisateur :</label>
+                    </div>
+                    <div
+                        class=""><!-- erreurs  -->
+                    </div>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="col-12 form-floating mb-1">
+                        <input class="form-control" aria-describedby="passwordHelpInline" type="password" placeholder="Votre mot de passe" name="pass" id="floatingInput" required>
+                        <label for="floatingInput">Mot de passe :</label>
+                        <span id="passwordHelpInline" class="form-text">
+                            Dois avoir 8 caractères, 1 majuscule et 1 chiffre.
+                        </span>
+                    </div>
+                    <div
+                        class=""><!-- erreurs  -->
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-outline-success col-12">Se connecter</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

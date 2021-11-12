@@ -9,7 +9,7 @@
 
 return [
     '' => ['HomeController', 'index',],
-    'login' => ['LoginController', 'login'],
+    'login' => ['LoginController', 'login', ['userInformations']],
     'inscription' => ['RegisterController', 'add'],
     'welcome' => ['RegisterController', 'welcome'],
     'items' => ['ItemController', 'index',],

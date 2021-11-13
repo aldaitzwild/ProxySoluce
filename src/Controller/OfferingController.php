@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\OfferingManager;
 use App\Model\CategoryManager;
+use App\Model\SkillManager;
 
 class OfferingController extends AbstractController
 {
@@ -88,8 +89,9 @@ class OfferingController extends AbstractController
     {
         $params = [];
         $offeringManager = new OfferingManager();
+        $skillManager = new SkillManager();
         $offer = $offeringManager->selectOfferById($id);
-        $skills = $offeringManager->selectSkillsByUserId($userid);
+        $skills = $skillManager->selectSkillsByUserId($userid);
         $params['offer'] = $offer;
         $params['skills'] = $skills;
 

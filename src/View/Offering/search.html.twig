@@ -19,7 +19,7 @@
 							<select id="category" name="category">
 								<option value="default" disabled>--Sélectionnez une catégorie--</option>
 								{% for category in categories %}
-									<option value="{{ category }}">{{ category }}</option>
+									<option value="{{ category.name }}">{{ category.name }}</option>
 								{% endfor %}
 							</select>
 						</div>

@@ -55,7 +55,8 @@ class OfferingManager extends AbstractManager
         FROM " . static::TABLE_PERSON_SKILL . " AS us
         JOIN " . self::TABLE_PERSON . " AS p ON us.person_id=p.id 
         LEFT JOIN " . SkillManager::TABLE . " AS s ON s.id=us.skill_id
-        HAVING us.person_id=:userid;");
+        HAVING us.person_id=:userid
+        ORDER BY s.name ASC;");
         $statement->bindValue('userid', $userId, \PDO::PARAM_INT);
         $statement->execute();
 

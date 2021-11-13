@@ -53,14 +53,9 @@ class OfferingController extends AbstractController
         $offeringManager = new OfferingManager();
         $categoryManager = new CategoryManager();
 
-        $categories = $categoryManager->selectAll();
-        $categorieNames = [];
-        foreach ($categories as $category) {
-            $categorieNames[] = $category['name'];
-        }
-        asort($categorieNames);
+        $categories = $categoryManager->selectAll('name');
 
-        $params = ['categories' => $categorieNames];
+        $params = ['categories' => $categories];
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors = [];

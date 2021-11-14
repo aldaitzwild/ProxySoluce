@@ -7,11 +7,8 @@
                 <h1 class="fs-1 p-2 g-1">Connexion</h1>
                 <div class="row g-1 align-items-center">
                     <div class="col-12 form-floating mb-1 form">
-                        <input class="form-control" type="text" placeholder="Utilisateur" name="user" id="floatingInput" value="{{ infos.user }}" required>
+                        <input class="form-control" type="text" placeholder="Utilisateur" name="user" id="floatingInput" value="{{ userInformations.user }}" required>
                         <label for="floatingInput" class="label">Utilisateur :</label>
-                    </div>
-                    <div
-                        class=""><!-- erreurs  -->
                     </div>
                 </div>
 
@@ -22,9 +19,6 @@
                         <span id="passwordHelpInline" class="form-text">
                             Dois avoir 8 caractères, 1 majuscule et 1 chiffre.
                         </span>
-                    </div>
-                    <div
-                        class=""><!-- erreurs  -->
                     </div>
                 </div>
                 <button type="submit" class="btn btn-outline-success col-12">Se connecter</button>

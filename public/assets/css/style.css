@@ -6,6 +6,13 @@
     text-align: end;
 }
 
+.container{
+    max-width : 100%;
+     height : auto;
+}
+
+
+
 .container1 {
     background-color: rgb(44, 42, 42);
     border: 94447C;
@@ -15,19 +22,18 @@
     width: 150px;
     border-color:rgb(153, 63, 153) ;
     border-radius: 8px;
+   }
+
+
    
-    
-    
-  
-   
-    
-}
 .nav-link1 {
     color:rgb(153, 63, 153);
     text-decoration: none;
     
     
 }
+
+
 
 .container2 {
     background-color: rgb(153, 63, 153);
@@ -47,6 +53,13 @@
     
 }
 
+.carousel-inner{
+    max-height: 400px;
+}
+
+.carousel-indicators{
+   border-width: 50pxx;
+}
 
 .logo {
     margin-left: 20px;
@@ -56,6 +69,8 @@ button {
     
     border: none;
 }
+
+
 
 .annonces {
     padding: 15px;

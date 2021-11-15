@@ -11,7 +11,6 @@ class RegisterController extends AbstractController
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $register = array_map('trim', $_POST);
-            $register = array_map('htmlentities', $register);
             $register = array_map('stripslashes', $register);
             $errors = array();
             if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
@@ -21,7 +20,7 @@ class RegisterController extends AbstractController
                 $errors['username'] = "Dois faire minimum 5 caractères.";
             }
             if ($_POST['pass'] != $_POST['confirm'] || $this->regexPass($_POST['pass'])) {
-                $errors['pass'] = "Dois contenir au moins 8 caractères, 1 minuscule, 1 majuscule et 1 chiffre." ;
+                $errors['pass'] = "Dois contenir au moins 8 caractères, 1 minuscule, 1 majuscule et 1 chiffre.";
             }
             foreach ($_POST as $index => $value) {
                 $errors = $this->processingErrors($index, $value, $errors);
@@ -38,7 +37,7 @@ class RegisterController extends AbstractController
             $userId = $registerManager->insert($register);
             $skillManager = new SkillManager();
             $skills = $skillManager->selectAll();
-            return $this->twig->render('DragnDrop/index.html.twig', ['skills' => $skills ,'userId' => $userId]);
+            return $this->twig->render('DragnDrop/index.html.twig', ['skills' => $skills, 'userId' => $userId]);
         }
         return $this->twig->render('Login/inscription.html.twig');
     }
@@ -56,7 +55,7 @@ class RegisterController extends AbstractController
             $extension = strtolower(end($tabExtension));
             if (in_array($extension, $extensionsOk) && $size <= $maxSize && $errors == 0) {
                 $uniqueName = uniqid('', true);
-                $file = $uniqueName . " . " . $extension;
+                $file = $uniqueName . "." . $extension;
                 move_uploaded_file($tmpName, '. /../../public/uploads/' . $file);
                 return $file;
             }
@@ -79,13 +78,29 @@ class RegisterController extends AbstractController
 
     public function regexPass($pass): bool
     {
-        return !filter_var($pass, FILTER_VALIDATE_REGEXP, array (
-            "options" => array ("regexp" => "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/")));
+        return !filter_var($pass, FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/")
+        ));
     }
 
     public function regexUser($user): bool
     {
-        return !filter_var($user, FILTER_VALIDATE_REGEXP, array (
-            "options" => array ("regexp" => "/^[A-Za-z][A-Za-z0-9]{4,31}$/")));
+        return !filter_var($user, FILTER_VALIDATE_REGEXP, array(
+            "options" => array("regexp" => "/^[A-Za-z][A-Za-z0-9]{4,31}$/")
+        ));
+    }
+
+
+    public function show($id): ?string
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location: /login');
+            return null;
+        } else {
+            var_dump($_SESSION);
+            $registerManager = new RegisterManager();
+            $user = $registerManager->selectOneById($id);
+            return $this->twig->render('Login/show.html.twig', ['user' => $user]);
+        }
     }
 }

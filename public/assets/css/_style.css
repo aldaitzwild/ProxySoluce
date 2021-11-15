@@ -6,12 +6,16 @@
     --purple : #94447C;
     --bg-light : radial-gradient(var(--primary-color),transparent,var(--purple) 130%);
 }
+
 *{
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
     font-family: 'roboto';
 }
+
+
+
 .style{
     background-color: var(--secondary-color) !important;
 }
@@ -23,3 +27,107 @@
     background-color: var(--purple) !important;
     color: var(--secondary-color) !important;
 }
+
+.bigmenu {
+    display:none;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+  
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+  
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+  
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+@media screen  and (min-width:800px){
+    .smallmenu {
+        display: none;
+    }
+    
+    .bigmenu {
+        display:block;
+
+    }
+    
+    .menu {
+        padding-left:0;
+        width: 15%;
+        height: 100%;
+        border-radius: 3%;
+        background: white;
+        position: fixed;
+    }
+      
+    h4 {
+        text-align: center;
+        color:black;
+    }
+      
+    .menu li {
+        list-style:square;
+        
+        text-align: center;
+    }
+      
+    .menu li a {
+        text-decoration: none;
+        color:black;
+        font-weight:bold;
+       
+    }
+      
+    .menu li :hover {
+        background: green;
+    }
+
+    body {
+        display:flex;
+        justify-content: start;       
+    }
+    
+    .menubody {
+        display:flex;
+        flex-direction: column;
+        width:15%;
+        margin-left: 10px;
+    }
+    
+    .content {
+        display:flex;
+        flex-grow: 1;
+    }
+}
+

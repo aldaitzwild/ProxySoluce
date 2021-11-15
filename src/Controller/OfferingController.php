@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Model\OfferingManager;
 use App\Model\CategoryManager;
+use App\Model\SkillManager;
 
 class OfferingController extends AbstractController
 {
@@ -53,7 +54,7 @@ class OfferingController extends AbstractController
         $offeringManager = new OfferingManager();
         $categoryManager = new CategoryManager();
 
-        $categories = $categoryManager->selectAll();
+        $categories = $categoryManager->selectAll('name');
 
         $params = ['categories' => $categories];
 
@@ -84,24 +85,32 @@ class OfferingController extends AbstractController
 
     /* Display offer */
 
-    public function show(int $id): string
+    public function show(int $id, int $userid): string
     {
         $params = [];
         $offeringManager = new OfferingManager();
+        $skillManager = new SkillManager();
         $offer = $offeringManager->selectOfferById($id);
+        $skills = $skillManager->selectSkillsByUserId($userid);
         $params['offer'] = $offer;
+        $params['skills'] = $skills;
 
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
             $visitorEmail = $data['email'];
+            $visitorMessage = $data['message'];
             $offerTitle = $data['title'];
 
             $errors = [];
 
             if (!filter_var($visitorEmail, FILTER_VALIDATE_EMAIL)) {
-                $errors[] = "Invalid email format";
+                $errors[] = "Format d'email invalide, veuillez corriger le champ 'email'.";
+            }
+
+            if (empty($visitorMessage)) {
+                $errors[] = "Message vide, veuillez compléter le champ 'message'.";
             }
 
             if (count($errors) > 0) {
@@ -112,7 +121,7 @@ class OfferingController extends AbstractController
                 $subjectSender = "Demande de contact pour votre annonce: $offerTitle";
 
                 $message = $data['message'];
-                $messageSender = "Here is a copy of your message \n" . $message;
+                $messageSender = "Voici une copie de votre message \n" . $message;
 
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -121,7 +130,7 @@ class OfferingController extends AbstractController
                 mail($recipient, $subject, $message, $headers);
                 mail($visitorEmail, $subjectSender, $messageSender, $headers);
 
-                $params['success'] = 'Message sent. Thank you.';
+                $params['success'] = 'Message envoyé, Merci.';
             }
         }
 

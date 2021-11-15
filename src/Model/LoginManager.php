@@ -15,7 +15,7 @@ class LoginManager extends AbstractManager
         $statement->execute();
         $result = $statement->fetch();
         if (!$result) {
-            throw new Exception("Cette utilisateur n'existe pas");
+            throw new Exception("Les informations sont incorrectes");
         } else {
             return $result;
         }

@@ -46,11 +46,13 @@
 						{% for offer in offers %}
 
 							<div class="offer bg-light border border-muted mx-auto p-4 mb-4 text-left col-12 col-lg-5">
-								<h4 class="text-primary">{{offer.title}}</h4>
+								<a href="/offerings/show?id={{offer.id}}&userid={{offer.userid}}" class="offer-title-link text-decoration-none">
+									<h4 class="text-primary">{{offer.title}}</h4>
+								</a>
 								<mark class='px-4 py-2 rounded mb-2 d-inline-block'>{{offer.category}}</mark>
 								<p class="mb-2 font-italic">{{offer.firstname ~ " " ~ offer.lastname}}
 								</p>
-								<a href="/offerings/show?id={{offer.id}}">Détails</a>
+								<a href="/offerings/show?id={{offer.id}}&userid={{offer.userid}}">Détails</a>
 							</div>
 
 

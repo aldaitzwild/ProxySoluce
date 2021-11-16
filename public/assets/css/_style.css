@@ -34,9 +34,10 @@
 }
 
 #butmenu {
-    color:white;
-    z-index: 10;
-    margin-top: 150px;
+    position: absolute;
+    color: #111;
+    z-index: 1;
+    margin-top: 200px;
 }
 
 .sidenav {

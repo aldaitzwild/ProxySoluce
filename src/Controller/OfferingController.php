@@ -21,6 +21,10 @@ class OfferingController extends AbstractController
             $offering = array_map('trim', $_POST);
             $offering = array_map('stripslashes', $offering);
 
+            if (!isset($_SESSION['userLogged'])) {
+                $errors['userLogged'] = "Il faut être connecté à vôtre compte";
+            }
+
             if (empty($_POST['description'])) {
                 $errors['description'] = "Veuillez remplir la partie description";
             }

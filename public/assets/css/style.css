@@ -1,4 +1,4 @@
-.backgroundPage {
+.bodyBackground {
     background-color: rgb(194, 186, 186)
 }
 
@@ -54,12 +54,28 @@
 }
 
 .carousel-inner{
-    max-height: 400px;
+    max-height: 30vw;
+
+}
+.hello{
+  
+    object-fit: none;
+    object-position: center;
+    margin: auto;
+    width: 100%;
+    height: 350px;
+    margin-bottom: 1rem;
+    border: 3px black solid;
+    
+
+}
+.carousel-caption h1{
+    position: relative;
+    margin-bottom: 2% !important;
+
+
 }
 
-.carousel-indicators{
-   border-width: 50pxx;
-}
 
 .logo {
     margin-left: 20px;

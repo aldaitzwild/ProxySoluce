@@ -95,6 +95,8 @@ class OfferingController extends AbstractController
         $params['offer'] = $offer;
         $params['skills'] = $skills;
 
+        $params['userLogged'] = isset($_SESSION['userLogged']);
+
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {

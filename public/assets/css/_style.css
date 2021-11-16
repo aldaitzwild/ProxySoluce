@@ -26,6 +26,7 @@
 .btn-outline-success:hover {
     background-color: var(--purple) !important;
     color: var(--secondary-color) !important;
+
 }
 
 .bigmenu {
@@ -144,4 +145,5 @@
     }
     
 }
+
 

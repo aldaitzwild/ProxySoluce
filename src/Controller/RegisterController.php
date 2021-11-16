@@ -12,19 +12,7 @@ class RegisterController extends AbstractController
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $register = array_map('trim', $_POST);
             $register = array_map('stripslashes', $register);
-            $errors = array();
-            if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
-                $errors['mail'] = "Ceci n'est pas un email";
-            }
-            if ($this->regexUser($_POST['user'])) {
-                $errors['username'] = "Dois faire minimum 5 caractères.";
-            }
-            if ($_POST['pass'] != $_POST['confirm'] || $this->regexPass($_POST['pass'])) {
-                $errors['pass'] = "Dois contenir au moins 8 caractères, 1 minuscule, 1 majuscule et 1 chiffre.";
-            }
-            foreach ($_POST as $index => $value) {
-                $errors = $this->processingErrors($index, $value, $errors);
-            }
+            $errors = $this->checkInformations($_POST);
             $register['picture'] = $this->addImage($_FILES);
             // AFFICHER ERREUR ET ARRETER SUITE DU SCRIPT
             if (!empty($errors)) {
@@ -40,6 +28,24 @@ class RegisterController extends AbstractController
             return $this->twig->render('DragnDrop/index.html.twig', ['skills' => $skills, 'userId' => $userId]);
         }
         return $this->twig->render('Login/inscription.html.twig');
+    }
+
+    private function checkInformations(array $info)
+    {
+        $errors = array();
+        if (!filter_var($info['mail'], FILTER_VALIDATE_EMAIL)) {
+            $errors['mail'] = "Ceci n'est pas un email";
+        }
+        if ($this->regexUser($info['user'])) {
+            $errors['username'] = "Dois faire minimum 5 caractères.";
+        }
+        if ($info['pass'] != $info['confirm'] || $this->regexPass($info['pass'])) {
+            $errors['pass'] = "Dois contenir au moins 8 caractères, 1 minuscule, 1 majuscule et 1 chiffre.";
+        }
+        foreach ($info as $index => $value) {
+            $errors = $this->processingErrors($index, $value, $errors);
+        }
+        return $errors;
     }
 
     public function addImage(array $files): string
@@ -91,16 +97,92 @@ class RegisterController extends AbstractController
     }
 
 
-    public function show($id): ?string
+    public function show(): ?string
     {
         if (!isset($_SESSION['userLogged'])) {
             header('Location: /login');
             return null;
         } else {
-            var_dump($_SESSION);
-            $registerManager = new RegisterManager();
-            $user = $registerManager->selectOneById($id);
-            return $this->twig->render('Login/show.html.twig', ['user' => $user]);
+            return $this->twig->render('Login/show.html.twig');
         }
+    }
+
+    public function edit(): ?string
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location: /login');
+            return null;
+        } else {
+            $userId = $_SESSION['userLogged']['id'];
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $register = array_map('trim', $_POST);
+                $register = array_map('stripslashes', $register);
+                $errors = $this->checkInformations($_POST);
+                if (isset($_FILES['picture'])) {
+                    $register['picture'] = $this->addImage($_FILES);
+                }
+
+                // AFFICHER ERREUR ET ARRETER SUITE DU SCRIPT
+                if (!empty($errors)) {
+                    return $this->twig->render('Login/inscription.html.twig', [
+                        'errors' => $errors,
+                        'edit' => true,
+                        'register' => $register,
+                    ]);
+                }
+
+                $registerManager = new RegisterManager();
+                $updateState = $registerManager->update($register, $userId);
+
+                if ($updateState) {
+                    foreach ($register as $key => $item) {
+                        $_SESSION['userLogged'][$key] = $item;
+                    }
+                }
+                header('Location: /profile');
+                return null;
+            } else {
+                $register = $_SESSION['userLogged'];
+                return $this->twig->render('Login/inscription.html.twig', [
+                    'edit' => true,
+                    'register' => $register,
+                ]);
+            }
+        }
+    }
+
+    public function editSkills(): ?string
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location: /login');
+            return null;
+        } else {
+            $userId = $_SESSION['userLogged']['id'];
+
+            $skillManager = new SkillManager();
+            $skills = $skillManager->selectAll();
+
+            $selected = $skillManager->selectSkillsByUserId($userId);
+
+            foreach ($selected as $item) {
+                $skills = $this->cleanArray($skills, $item['id']);
+            }
+
+            $params = ['skills' => $skills, 'selected' => $selected, 'userId' => $userId, 'update' => true];
+
+            return $this->twig->render('DragnDrop/index.html.twig', $params);
+        }
+    }
+
+    private function cleanArray($array, $term)
+    {
+        $matches = array();
+        foreach ($array as $a) {
+            if ($a['id'] != $term) {
+                $matches[] = $a;
+            }
+        }
+        return $matches;
     }
 }

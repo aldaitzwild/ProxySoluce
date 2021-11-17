@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\OfferingManager;
 use App\Model\RegisterManager;
 use App\Model\SkillManager;
 
@@ -184,5 +185,29 @@ class RegisterController extends AbstractController
             }
         }
         return $matches;
+    }
+
+    public function delete(): ?string
+    {
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location: /login');
+            return null;
+        } else {
+            $userId = $_SESSION['userLogged']['id'];
+
+            $offeringManager = new OfferingManager();
+            $offeringManager->deleteOffersByUserId($userId);
+
+            $skillManager = new SkillManager();
+            $skillManager->deleteSkillsByUserId($userId);
+
+            $registerManager = new RegisterManager();
+            $registerManager->deleteUserById($userId);
+
+            session_destroy();
+
+            header('Location: /');
+            return null;
+        }
     }
 }

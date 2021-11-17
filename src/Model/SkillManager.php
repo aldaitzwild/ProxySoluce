@@ -50,4 +50,11 @@ class SkillManager extends AbstractManager
 
         return $statement->fetchAll();
     }
+
+    public function deleteSkillsByUserId(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE_PERSON_SKILL .  " WHERE person_id=:id;");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
+    }
 }

@@ -74,4 +74,16 @@ class OfferingManager extends AbstractManager
 
         return $statement->execute();
     }
+
+    public function showAllOffer()
+    {
+        $statement = $this->pdo->prepare("SELECT  p.firstname, p.lastname, o.id, o.title, o.city, c.name
+        AS category, o.person_id
+        FROM " . self::TABLE . " AS o
+        JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
+        JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id 
+        ORDER BY id DESC;");
+        $statement->execute();
+        return $statement->fetchAll();
+    }
 }

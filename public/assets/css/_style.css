@@ -6,12 +6,16 @@
     --purple : #94447C;
     --bg-light : radial-gradient(var(--primary-color),transparent,var(--purple) 130%);
 }
+
 *{
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
     font-family: 'roboto';
 }
+
+
+
 .style{
     background-color: var(--secondary-color) !important;
 }
@@ -22,4 +26,128 @@
 .btn-outline-success:hover {
     background-color: var(--purple) !important;
     color: var(--secondary-color) !important;
+
 }
+
+.bigmenu {
+    display:none;
+}
+
+#butmenu {
+    position: absolute;
+    color: #111;
+    z-index: 1;
+    margin-top: 200px;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 10%;
+}
+
+.sidenav a {
+    padding: 8px 8px 35px 50px;
+    text-decoration: none;
+    font-size: 60px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+  
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+  
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+  
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+@media screen  and (min-width:1000px){
+    .smallmenu {
+        display: none;
+    }
+    
+    .bigmenu {
+        display:block;
+
+    }
+
+    #butmenu {
+        display:none;
+    }
+    
+    .menu {
+        padding-left:0;
+        width: 15%;
+        height: 100%;
+        border-radius: 3%;
+        background: white;
+        position: fixed;
+    }
+      
+    h4 {
+        text-align: center;
+        color:black;
+    }
+      
+    .menu li {
+        margin-top: 15%;           
+        text-align: center;
+        height: 10%;
+    }
+      
+    .menu li a {
+        
+        text-decoration: none;
+        font-weight:bold;
+        font-size: medium;
+       
+           
+    }
+      
+    .menu li :hover {
+        color:#94447C;
+    }
+
+    html, body {
+        height: 100vh;
+    }
+
+    body {
+        display:flex;
+        justify-content: start;       
+    }
+    
+    .menubody {
+        display:flex;
+        flex-direction: column;
+        flex-shrink: 0;
+        width:15%;
+        margin-left: 10px;
+    }
+    
+    .content {
+        flex-grow: 1;
+    }
+    
+}
+
+

@@ -32,3 +32,7 @@
     font-size: 1.1em;
     color: var(--purple);
 }
+
+p {
+    text-align:center;
+}

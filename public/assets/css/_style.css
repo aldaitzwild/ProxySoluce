@@ -14,8 +14,6 @@
     font-family: 'roboto';
 }
 
-
-
 .style{
     background-color: var(--secondary-color) !important;
 }
@@ -35,9 +33,10 @@
 
 #butmenu {
     position: absolute;
+    position:fixed;
     color: #111;
-    z-index: 1;
-    margin-top: 200px;
+    z-index: 100;
+    margin-top: 250px;
 }
 
 .sidenav {
@@ -142,6 +141,7 @@
     
     .content {
         display:flex;
+        justify-content: center;
         flex-grow: 1;
     }
     

@@ -28,4 +28,5 @@ return [
     'offerings/add' => ['OfferingController', 'add'],
     'offerings/search' => ['OfferingController', 'search'],
     'offerings/show' => ['OfferingController', 'show', ['id', 'userid']],
+    'logout' => ['LogoutController', 'logout',],
 ];

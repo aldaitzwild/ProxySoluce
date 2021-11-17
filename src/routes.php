@@ -10,8 +10,7 @@
 use App\Controller\HomeController;
 
 return [
-
-    '' => ['HomeController', 'home',],
+    '' => ['HomeController', 'index',],
     'login' => ['LoginController', 'login'],
     'inscription' => ['RegisterController', 'add'],
     'welcome' => ['RegisterController', 'welcome'],
@@ -28,5 +27,6 @@ return [
     'skill' => ['DragnDropController', 'index'],
     'offerings/add' => ['OfferingController', 'add'],
     'offerings/search' => ['OfferingController', 'search'],
-    'offerings/show' => ['OfferingController', 'show', ['id', 'userid']],
+    'offerings/show' => ['OfferingController', 'show', ['id']],
+    'offering/update' => ['OfferingController', 'edit', ['id']]
 ];

@@ -42,7 +42,9 @@ class OfferingController extends AbstractController
             if (!empty($errors)) {
                 return $this->twig->render('Offering/add.html.twig', [
                     'errors' => $errors,
-                    'categories' => $categories
+                    'categories' => $categories,
+                    'add' => $this->add(),
+                    'pageTitle' => "Ajouter une nouvelle offre",
                 ]);
             }
 
@@ -53,7 +55,9 @@ class OfferingController extends AbstractController
             return null;
         }
 
-        return $this->twig->render('Offering/add.html.twig', ['categories' => $categories]);
+        return $this->twig->render('Offering/add.html.twig', ['categories' => $categories,
+            'pageTitle' => "Ajouter une nouvelle offre"
+        ]);
     }
 
     /**
@@ -95,19 +99,22 @@ class OfferingController extends AbstractController
 
     /* Display offer */
 
-    public function show(int $id, int $userid): string
+    public function show(int $id): string
     {
         $params = [];
         $offeringManager = new OfferingManager();
         $skillManager = new SkillManager();
         $offer = $offeringManager->selectOfferById($id);
-        $skills = $skillManager->selectSkillsByUserId($userid);
+        $skills = $skillManager->selectSkillsByUserId($offer['person_id']);
+
         $params['offer'] = $offer;
         $params['skills'] = $skills;
 
         $params['userLogged'] = isset($_SESSION['userLogged']);
 
-
+        if (isset($_SESSION['userLogged'])) {
+            $params['user'] = $_SESSION['userLogged'];
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = array_map('trim', $_POST);
@@ -147,5 +154,39 @@ class OfferingController extends AbstractController
         }
 
         return $this->twig->render('Offering/show.html.twig', $params);
+    }
+
+    public function edit(int $id): string
+    {
+        $offeringManager = new OfferingManager();
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        $offer = $offeringManager->selectOfferById($id);
+
+        $params = [];
+
+        $params['userLogged'] = isset($_SESSION['userLogged']);
+
+        if (isset($_SESSION['userLogged'])) {
+            $params['user'] = $_SESSION['userLogged'];
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $offering = array_map('trim', $_POST);
+            $offering['id'] = $id;
+            $offeringManager->update($offering);
+            header('Location:/offerings/show?id=' . $id);
+        }
+
+        if ($offer != null) {
+            return $this->twig->render('Offering/add.html.twig', [
+                'offer' => $offer,
+                'categories' => $categories,
+                'userLogged' => $params,
+                'pageTitle' => "Votre offre",
+            ]);
+        }
+
+        return $this->twig->render('Offering/show.html.twig');
     }
 }

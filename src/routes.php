@@ -30,4 +30,5 @@ return [
     'offerings/show' => ['OfferingController', 'show', ['id']],
     'offering/delete' => ['OfferingController', 'delete'],
     'offering/update' => ['OfferingController', 'edit', ['id']],
+    'logout' => ['LogoutController', 'logout',],
 ];

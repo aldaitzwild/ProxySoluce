@@ -23,7 +23,9 @@
 }
 .signup{
     margin-bottom: 150px !important;
-    margin-left: 60px !important;
+    margin-left: 80px !important;
+    font-style: inherit !important;
+    font-weight: lighter;
 }
 .signup a{
     color: black;
@@ -31,4 +33,8 @@
 .signup a:hover{
     font-size: 1.1em;
     color: var(--purple);
+}
+
+p {
+    text-align:center;
 }

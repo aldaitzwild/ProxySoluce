@@ -33,9 +33,7 @@ section{
 
 #supr {
     border-radius: 7%;
-       
 }
-
 
 .btn-outline-success{
     border-color: var(--purple) !important;
@@ -45,7 +43,6 @@ section{
     background-color: var(--purple) !important;
     color: var(--secondary-color) !important;
 }
-
 #session {
     display:none;
 }

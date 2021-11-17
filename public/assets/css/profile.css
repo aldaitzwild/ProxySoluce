@@ -20,3 +20,8 @@
   color: white !important;
   max-width: 80% !important;
 }
+
+#deleteButton {
+  background-color: red !important;
+  border: 2px solid red !important;
+}

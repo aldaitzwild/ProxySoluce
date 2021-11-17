@@ -10,13 +10,13 @@
 use App\Controller\HomeController;
 
 return [
-
     '' => ['HomeController', 'home',],
     'login' => ['LoginController', 'login'],
     'inscription' => ['RegisterController', 'add'],
     'welcome' => ['RegisterController', 'welcome'],
     'profile' => ['RegisterController', 'show'],
     'profile/edit' => ['RegisterController', 'edit'],
+    'profile/delete' => ['RegisterController', 'delete'],
     'profile/edit/skills' => ['RegisterController', 'editSkills'],
     'profile/edit/skill' => ['DragnDropController', 'updateSkills'],
     'items' => ['ItemController', 'index',],
@@ -27,6 +27,8 @@ return [
     'skill' => ['DragnDropController', 'index'],
     'offerings/add' => ['OfferingController', 'add'],
     'offerings/search' => ['OfferingController', 'search'],
-    'offerings/show' => ['OfferingController', 'show', ['id', 'userid']],
+    'offerings/show' => ['OfferingController', 'show', ['id']],
+    'offering/delete' => ['OfferingController', 'delete'],
+    'offering/update' => ['OfferingController', 'edit', ['id']],
     'logout' => ['LogoutController', 'logout',],
 ];

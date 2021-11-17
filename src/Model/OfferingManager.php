@@ -9,7 +9,8 @@ class OfferingManager extends AbstractManager
 
     public function insert(array $offering, int $userId): int
     {
-        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE . " (title, description,city,person_id,category_id) 
+        $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
+                                        " (title, description,city,person_id,category_id) 
                                         VALUES (:title,:description,:city,:person_id,:category);");
         $statement->bindValue('title', $offering['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $offering['description'], \PDO::PARAM_STR);

@@ -14,7 +14,7 @@ class OfferingController extends AbstractController
         $categoryManager = new CategoryManager();
 
         $categories = $categoryManager->selectAll();
-        
+
 
         $errors = [];
 
@@ -47,8 +47,8 @@ class OfferingController extends AbstractController
             }
 
             $userId = $_SESSION['userLogged']['id'];
-            
-            $offeringId = $offeringManager->insert($offering,$userId);
+
+            $offeringId = $offeringManager->insert($offering, $userId);
             header("Location:/offerings/show?id=$offeringId&userid=$userId");
             return null;
         }

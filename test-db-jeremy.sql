@@ -113,6 +113,8 @@ INSERT INTO offering (title, city, description, person_id, category_id) VALUES (
 
 INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Taille de haie', 'Grenoble', 'Je vous propose mes services pour tailler des haies.', (SELECT id FROM person WHERE lastname="Gaudin"), (SELECT id FROM category WHERE name="bricolage"));
 
+plomberie, bricolage, demenagement, pose cuisine, jardinage, peinture
+
 
 
 

@@ -113,6 +113,7 @@ class RegisterController extends AbstractController
             header('Location: /login');
             return null;
         } else {
+            var_dump($_SESSION['userLogged']);
             $userId = $_SESSION['userLogged']['id'];
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {

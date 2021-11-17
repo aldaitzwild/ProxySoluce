@@ -40,7 +40,7 @@ class RegisterManager extends AbstractManager
             adress=:adress,
             postal=:postal,
             town=:town 
-            WHERE id=$id;";
+            WHERE id=:id;";
         } else {
             $query = "UPDATE " . self::TABLE . " 
             SET 
@@ -54,7 +54,7 @@ class RegisterManager extends AbstractManager
             postal=:postal,
             town=:town,
             picture=:picture 
-            WHERE id=$id;";
+            WHERE id=:id;";
         }
 
         $statement = $this->pdo->prepare($query);
@@ -67,6 +67,7 @@ class RegisterManager extends AbstractManager
         $statement->bindValue(':adress', $register['adress'], \PDO::PARAM_STR);
         $statement->bindValue(':postal', $register['postal'], \PDO::PARAM_INT);
         $statement->bindValue(':town', $register['town'], \PDO::PARAM_STR);
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
         if (isset($register['picture'])) {
             $statement->bindValue(':picture', $register['picture'], \PDO::PARAM_STR);
         }

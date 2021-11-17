@@ -14,8 +14,6 @@
     font-family: 'roboto';
 }
 
-
-
 .style{
     background-color: var(--secondary-color) !important;
 }
@@ -35,9 +33,10 @@
 
 #butmenu {
     position: absolute;
+    position:fixed;
     color: #111;
-    z-index: 1;
-    margin-top: 200px;
+    z-index: 100;
+    margin-top: 250px;
 }
 
 .sidenav {
@@ -98,7 +97,6 @@
         padding-left:0;
         width: 15%;
         height: 100%;
-        border-radius: 3%;
         background: white;
         position: fixed;
     }
@@ -133,7 +131,8 @@
 
     body {
         display:flex;
-        justify-content: start;       
+        justify-content: start;
+        width: 100%;
     }
     
     .menubody {
@@ -141,11 +140,13 @@
         flex-direction: column;
         flex-shrink: 0;
         width:15%;
-        margin-left: 10px;
+        z-index: 10;
     }
     
     .content {
+        justify-content: center;
         flex-grow: 1;
+        max-width: 85%;
     }
     
 }

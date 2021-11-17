@@ -27,5 +27,6 @@ return [
     'offerings/add' => ['OfferingController', 'add'],
     'offerings/search' => ['OfferingController', 'search'],
     'offerings/show' => ['OfferingController', 'show', ['id']],
-    'offering/update' => ['OfferingController', 'edit', ['id']]
+    'offering/delete' => ['OfferingController', 'delete'],
+    'offering/update' => ['OfferingController', 'edit', ['id']],
 ];

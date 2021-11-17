@@ -127,6 +127,10 @@
         color:#94447C;
     }
 
+    html, body {
+        height: 100vh;
+    }
+
     body {
         display:flex;
         justify-content: start;       
@@ -141,7 +145,6 @@
     }
     
     .content {
-        display:flex;
         flex-grow: 1;
     }
     

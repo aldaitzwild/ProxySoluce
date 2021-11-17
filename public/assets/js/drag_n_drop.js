@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const skillsPool = document.querySelector('.skills');
   const dropZone = document.querySelector('.drop-zone');
 
-  const skillsInitial = [].slice.call(skillsPool.children);
+  const skillsInitial = [].slice.call(skillsPool.getElementsByTagName('li'));
   sortSkills(skillsInitial, 'id');
   updateSkills(skillsPool, skillsInitial);
 
@@ -68,10 +68,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
       // Set the dropEffect to move
       e.dataTransfer.dropEffect = 'move';
     }
-
     this.classList.remove('border-secondary');
-    this.classList.add('over');
-    this.classList.add('border-primary');
+    this.classList.add('over','border-primary');
   }
 
   function handleDragLeave(e) {
@@ -89,7 +87,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // Handle skill drop and skill removal
 
   function handleDropZone(e) {
-    this.classList.remove('border-primary');
+    this.classList.remove('over');
     this.classList.add('border-secondary');
     const target = e.target;
     if (target) {
@@ -125,7 +123,7 @@ function addRemoveButtonHandler(button, skillsPool, input, skillsInitial) {
       const skillToBeRemoved = target.parentNode;
       if (
         !confirm(
-          `\n!!! Are you sure you want to remove the following skill ?\n\n-- ${skillToBeRemoved.firstChild.nodeValue.trim()} --`
+          `\n Etes-vous sur de vouloir retirer cette compétences de votre liste ? \n\n ${skillToBeRemoved.firstChild.nodeValue.trim()} `
         )
       ) {
         return;

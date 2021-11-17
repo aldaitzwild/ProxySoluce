@@ -57,6 +57,11 @@
     max-height: 30vw;
 
 }
+
+#carouselExampleCaptions {
+max-width: 100%;
+
+}
 .hello{
   
     object-fit: none;

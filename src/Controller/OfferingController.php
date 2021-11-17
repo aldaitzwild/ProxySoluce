@@ -8,12 +8,13 @@ use App\Model\SkillManager;
 
 class OfferingController extends AbstractController
 {
-    public function add(): string
+    public function add(): ?string
     {
         $offeringManager = new OfferingManager();
         $categoryManager = new CategoryManager();
 
         $categories = $categoryManager->selectAll();
+        
 
         $errors = [];
 
@@ -22,7 +23,8 @@ class OfferingController extends AbstractController
             $offering = array_map('stripslashes', $offering);
 
             if (!isset($_SESSION['userLogged'])) {
-                $errors['userLogged'] = "Il faut être connecté à vôtre compte";
+                header('Location:/login');
+                return null;
             }
 
             if (empty($_POST['description'])) {
@@ -44,7 +46,11 @@ class OfferingController extends AbstractController
                 ]);
             }
 
-            $offeringManager->insert($offering);
+            $userId = $_SESSION['userLogged']['id'];
+            
+            $offeringId = $offeringManager->insert($offering,$userId);
+            header("Location:/offerings/show?id=$offeringId&userid=$userId");
+            return null;
         }
 
         return $this->twig->render('Offering/add.html.twig', ['categories' => $categories]);

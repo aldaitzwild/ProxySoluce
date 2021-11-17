@@ -23,12 +23,10 @@ class HomeController extends AbstractController
      */
     public function home()
     {
-        
+
         $categoryManager = new CategoryManager();
          $categories = $categoryManager->selectAll();
-    return $this->twig->render('Home/home.html.twig', ['categories' => $categories]); 
-}
+        return $this->twig->render('Home/home.html.twig', ['categories' => $categories]); 
+    }
 
 }
-
-

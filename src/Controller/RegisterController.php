@@ -113,14 +113,13 @@ class RegisterController extends AbstractController
             header('Location: /login');
             return null;
         } else {
-            var_dump($_SESSION['userLogged']);
             $userId = $_SESSION['userLogged']['id'];
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $register = array_map('trim', $_POST);
                 $register = array_map('stripslashes', $register);
                 $errors = $this->checkInformations($_POST);
-                if (isset($_FILES['picture'])) {
+                if ($_FILES['picture']['name'] != '') {
                     $register['picture'] = $this->addImage($_FILES);
                 }
 

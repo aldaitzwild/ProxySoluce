@@ -1,0 +1,39 @@
+body {
+  background-color: lightgray !important;
+}
+
+.container {
+  border-radius: 1rem;
+}
+
+.person__img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+}
+
+.offer_user_skill {
+  border-radius: 2rem;
+}
+
+.offer_item {
+  border-radius: 1rem;
+  border: 4px solid #ddd;
+}
+
+.form_label {
+  display: block;
+  width: 100%;
+}
+
+.form_input {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.svg-icon {
+  display: block;
+  width: 1.5rem;
+}

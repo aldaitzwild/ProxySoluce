@@ -9,6 +9,8 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
+
 class HomeController extends AbstractController
 {
     /**
@@ -19,8 +21,10 @@ class HomeController extends AbstractController
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function index()
+    public function home()
     {
-        return $this->twig->render('Home/index.html.twig');
+        $categoryManager = new CategoryManager();
+        $categories = $categoryManager->selectAll();
+        return $this->twig->render('Home/home.html.twig', ['categories' => $categories]);
     }
 }

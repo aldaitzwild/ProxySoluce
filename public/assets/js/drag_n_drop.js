@@ -8,8 +8,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   // If POST variable and dropZone therefore non empty, sort selected skills and add eventListeners to remove skill buttons
   if (dropZone.children.length > 0) {
-    const skillsSelected = [].slice.call(dropZone.children);
-    sortSkills(skillsSelected, 'id');
+    const skillsSelected = [].slice.call(dropZone.getElementsByTagName('li'));
+    sortSkills(skillsSelected);
     updateSkills(dropZone, skillsSelected, false);
 
     skillsSelected.forEach((skill) => {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       skillsInitial.push(skill);
     });
 
-    sortSkills(skillsInitial, 'id');
+    sortSkills(skillsInitial);
   }
 
   const filterInput = document.querySelector('.skills-filter');
@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       e.dataTransfer.dropEffect = 'move';
     }
     this.classList.remove('border-secondary');
-    this.classList.add('over','border-primary');
+    this.classList.add('over', 'border-primary');
   }
 
   function handleDragLeave(e) {
@@ -186,8 +186,8 @@ function updateSkills(container, skills, filterChecked = true) {
 
 // Sort skills
 
-function sortSkills(array, itemToCompare) {
+function sortSkills(array) {
   array.sort((a, b) =>
-    a[`${itemToCompare}`].localeCompare(b[`${itemToCompare}`])
+    a.firstChild.nodeValue.localeCompare(b.firstChild.nodeValue)
   );
 }

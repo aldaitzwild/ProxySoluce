@@ -104,14 +104,36 @@ INSERT INTO skill (name) VALUES ('jardinage'), ('maconnerie'), ('mecanique'), ('
 INSERT INTO category (name) VALUES ('plomberie'), ('bricolage'), ('demenagement'), ('pose_cuisine');
 
 
-INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Jérémy', 'Gautrais', 'j.gautrais@compagnies.com', '1990-05-09', 'jeremy', 'root', '17 rue Claude Jusseaud', '69110', 'Sainte Foy les Lyon');
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Jérémy', 'Gautrais', 'j.gautrais@compagnies.com', '1990-05-09', 'jeremy', 'root', '17 rue du Test', '69002', 'Lyon');
 
-INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Valentin', 'Gaudin', 'v.gaudin@compagnies.com', '1990-05-09', 'valentin', 'root', '1rue du Platane', '32000', 'Grenoble');
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Valentin ', 'Gaudin', 'v.gaudin@compagnies.com', '1990-05-09', 'valentin', 'root', '17 rue du Test', '38000', 'Grenoble');
 
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Anthony ', 'Verchere', 'a.verchere@compagnies.com', '1990-05-09', 'anthony', 'root', '17 rue du Test', '69000', 'Lyon');
 
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Développement de sites web', 'Lyon', 'Je vous propose mes services pour développer des sites web interactifs.', (SELECT id FROM person WHERE lastname="Gautrais"), (SELECT id FROM category WHERE name="informatique"));
+INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Michel ', 'Hoffman', 'm.hoffman@compagnies.com', '1990-05-09', 'michel', 'root', '17 rue du Test', '69000', 'Lyon');
 
-INSERT INTO offering (title, city, description, person_id, category_id) VALUES ('Taille de haie', 'Grenoble', 'Je vous propose mes services pour tailler des haies.', (SELECT id FROM person WHERE lastname="Gaudin"), (SELECT id FROM category WHERE name="bricolage"));
+INSERT INTO user_skill (`person_id`, `skill_id`) VALUES (2, 1), (2, 2), (1, 6), (1, 7), (1, 9), (3, 3), (3, 4), (4, 13), (4, 10), (4, 11);
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Réparation d'éviers", 'Lyon', 'Je vous propose mes services pour réparer des éviers.', (SELECT id FROM person WHERE lastname="Gautrais"), (SELECT id FROM category WHERE name="plomberie"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Réparation de chaudière", 'Lyon', 'Je vous propose mes services pour réparer des chaudières.', (SELECT id FROM person WHERE lastname="Gautrais"), (SELECT id FROM category WHERE name="plomberie"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Pose de planchers", 'Lyon', 'Je vous propose mes services pour poser des planchers en bois massif.', (SELECT id FROM person WHERE lastname="Hoffman"), (SELECT id FROM category WHERE name="bricolage"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Pose de carrelage", 'Lyon', 'Je vous propose mes services pour poser des carrelages.', (SELECT id FROM person WHERE lastname="Hoffman"), (SELECT id FROM category WHERE name="bricolage"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Pose d'étagères", 'Lyon', 'Je vous propose mes services pour installer des étagères murales.', (SELECT id FROM person WHERE lastname="Hoffman"), (SELECT id FROM category WHERE name="bricolage"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Pose de cuisine", 'Lyon', 'Je vous propose mes services pour installer des cuisines.', (SELECT id FROM person WHERE lastname="Hoffman"), (SELECT id FROM category WHERE name="pose cuisine"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Débrousaillage", 'Grenoble', 'Je vous propose mes services pour débroussailler.', (SELECT id FROM person WHERE lastname="Gaudin"), (SELECT id FROM category WHERE name="jardinage"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Taille de haie", 'Grenoble', 'Je vous propose mes services pour tailler des haies avec ma tronçonneuse.', (SELECT id FROM person WHERE lastname="Gaudin"), (SELECT id FROM category WHERE name="jardinage"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Rénovation murale", 'Lyon', 'Je vous propose mes services pour repeindre vos murs et plafonds.', (SELECT id FROM person WHERE lastname="Verchere"), (SELECT id FROM category WHERE name="peinture"));
+
+INSERT INTO offering (title, city, description, person_id, category_id) VALUES ("Réalisation de portraits", 'Lyon', 'Je vous propose mes services pour vous tirer le portrait.', (SELECT id FROM person WHERE lastname="Verchere"), (SELECT id FROM category WHERE name="peinture"));
+
 
 
 

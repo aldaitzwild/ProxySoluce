@@ -15,11 +15,43 @@
 </head>
 
 <body class="bg-secondary">
-    {% block content %}
-    {% endblock %}
-    {% block javascript %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    {% endblock %}
+        <div class="menubody">
+            <div class="smallmenu">                
+                <div id="mySidenav" class="sidenav">
+                    <a href="javascript:void(0)" style="font-size:60px" class="closebtn" onclick="closeNav()">⬅</a>
+                    <a href="#"><img src="/assets/images/home1.png" alt="logo home" width="80" height="auto"></a>
+                    <a href="/offerings/search"><img src="/assets/images/search1.png" alt="logo search" width="80" height="auto"></a>
+                    <a href="/profil"><img src="/assets/images/parametre2.png" alt="logo parametre" width="80" height="auto"></a>
+                </div>
+            </div>
+
+             
+            <div class="bigmenu">
+                <ul class="menu">
+                    <li><a href="#" class="gap-2 btn btn-outline-success col-sm-7">Home</a></li>
+                    <li><a href="/offerings/search" class="gap-2 btn btn-outline-success col-sm-7">Recherche</a></li>
+                    <li><a href="/profil" class="gap-2 btn btn-outline-success col-sm-7">Paramètres</a></li>
+                </ul>          
+            </div>        
+        </div>
+
+        <div class="content">
+            <span id="butmenu" style="font-size:50px;cursor:pointer" onclick="openNav()">➡</span>
+            {% block content %}
+            {% endblock %}
+        </div>
+            {% block javascript %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+            <script>
+            function openNav() {
+            document.getElementById("mySidenav").style.width = "180px";
+            }
+
+            function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            }
+            </script>       
+            {% endblock %}
 </body>
 </html>
 

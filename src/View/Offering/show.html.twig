@@ -78,13 +78,31 @@
 
 				{% if user.id is defined %}
 					{% if user.id == offer['person_id'] %}
-						<button class="btn btn-outline-success col-4 mx-auto g-2">
-							<a href="/offering/update?id={{offer.id}}">Mettre à jour votre annonce</a>
-						</button>
+						<div class="container m-2 g-2 d-flex align-items-center justify-content-center">
+							<div class="row col-6">
+							<a href="/offering/update?id={{offer.id}}" class="col-6 mx-auto">
+								<button class="btn btn-outline-success">
+									Mettre à jour votre annonce
+								</button>
+							</a>
+							</div>
+
+							<div class="row col-6">
+							<form action="/offering/delete" method="post" class="col-6 mx-auto">
+								<input type="hidden" name="id" value="{{offer.id}}">
+									<button class="btn btn-outline-success" id="deleteOffer">
+										Supprimer votre annonce
+									</button>
+							</form>
+							</div>
+						</div>
 					{% endif %}
 				{% endif %}
-
 			</div>
 		</div>
 	</article>
+{% endblock %}
+
+{% block javascript %}
+	<script src="/assets/js/deleteOffer.js"></script>
 {% endblock %}

@@ -189,4 +189,14 @@ class OfferingController extends AbstractController
 
         return $this->twig->render('Offering/show.html.twig');
     }
+
+    public function delete()
+    {
+        $offeringManager = new OfferingManager();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $id = trim($_POST['id']);
+            $offeringManager->delete((int)$id);
+            header('Location:/offerings/search');
+        }
+    }
 }

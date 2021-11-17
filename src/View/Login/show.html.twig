@@ -14,7 +14,7 @@
 
 			<a href="/profile/offerings" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center">Modifier mes annonces</a>
 
-			<a href="/profile/delete" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center">Supprimer mon compte</a>
+			<a href="/profile/delete" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center" id="deleteButton">Supprimer mon compte</a>
 
 
 		</div>
@@ -25,4 +25,19 @@
 
 	</div>
 
+{% endblock %}
+{% block javascript %}
+	<script>
+		const deleteButton = document.getElementById('deleteButton');
+deleteButton.addEventListener('click', (event) => {
+const confirm = window.confirm('Etes-vous sûr de vouloir supprimer votre compte ?');
+if (confirm == true) {
+return true;
+} else {
+event.stopPropagation();
+event.preventDefault();
+return false;
+}
+})
+	</script>
 {% endblock %}

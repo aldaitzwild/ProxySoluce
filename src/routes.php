@@ -16,6 +16,7 @@ return [
     'welcome' => ['RegisterController', 'welcome'],
     'profile' => ['RegisterController', 'show'],
     'profile/edit' => ['RegisterController', 'edit'],
+    'profile/delete' => ['RegisterController', 'delete'],
     'profile/edit/skills' => ['RegisterController', 'editSkills'],
     'profile/edit/skill' => ['DragnDropController', 'updateSkills'],
     'items' => ['ItemController', 'index',],

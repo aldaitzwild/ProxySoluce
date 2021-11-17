@@ -125,9 +125,14 @@
         color:#94447C;
     }
 
+    html, body {
+        height: 100vh;
+    }
+
     body {
         display:flex;
-        justify-content: start;       
+        justify-content: start;
+        width: 100%;
     }
     
     .menubody {
@@ -135,12 +140,13 @@
         flex-direction: column;
         flex-shrink: 0;
         width:15%;
+        z-index: 10;
     }
     
     .content {
-        display:flex;
         justify-content: center;
         flex-grow: 1;
+        max-width: 85%;
     }
     
 }

@@ -10,7 +10,7 @@ class OfferingManager extends AbstractManager
     public function insert(array $offering, int $userId): int
     {
         $statement = $this->pdo->prepare("INSERT INTO " . self::TABLE .
-                                        " (title, description,city,person_id,category_id) 
+            " (title, description,city,person_id,category_id) 
                                         VALUES (:title,:description,:city,:person_id,:category);");
         $statement->bindValue('title', $offering['title'], \PDO::PARAM_STR);
         $statement->bindValue('description', $offering['description'], \PDO::PARAM_STR);
@@ -48,6 +48,13 @@ class OfferingManager extends AbstractManager
         $statement->execute();
 
         return $statement->fetch();
+    }
+
+    public function deleteOffersByUserId(int $id): void
+    {
+        $statement = $this->pdo->prepare("DELETE FROM " . self::TABLE .  " WHERE person_id=:id;");
+        $statement->bindValue('id', $id, \PDO::PARAM_INT);
+        $statement->execute();
     }
 
 

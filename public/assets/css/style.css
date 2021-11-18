@@ -112,3 +112,12 @@ button {
     #000000 1px -1px;
   text-align: center;
 }
+.arrow{
+  color: black !important;
+}
+.carousel span{
+  color: #000000 !important;
+}
+.name{
+  color: #c4c4c4 !important;
+}

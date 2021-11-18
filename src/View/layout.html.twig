@@ -57,28 +57,45 @@
 		<div
 			class="content">
 			{# conteneur pour la barre de nav en haut + emplacement contenu #}
+			<div class="bulle">
 			<span id="butmenu" style="font-size:50px;cursor:pointer" onclick="openNav()">➡</span>
+			</div>
 			{# bouton pour ouvrir le menu mobile #}
 			<nav
 				class="navbar navbar-expand navbar-dark bg-dark">
 				{# navbar sur la partie haute #}
 				<a href="/" class="navbar-brand logo">ProxySoluce</a>
 
-				<div class="container-fluid d-flex bd-highlight mb-3 justify-content-end ">
-					<div class="row">
+			<div class="container-fluid d-flex bd-highlight mb-3 justify-content-end ">
+				<div class="row">
+					{% if userLogged == true %}
+						<div class="col btn-lg d-flex justify-content-end">
+							<button type="button" class="container1" disabled>
+								    <p class="name align-items-center">{{ userLogged.firstname }}</p>
+							</button>
+						</div>
+					{% else %}
 						<div class="col btn-lg d-flex justify-content-end   ">
 							<button type="button" class="container1 ">
 								<a href="/login" class="nav-link1 ">Connexion</a>
 							</button>
 						</div>
-
+					{% endif %}
+					{% if userLogged == true %}
 						<div class="col btn-lg d-flex justify-content-end  ">
 							<button type="button" class="container2 ">
 								<a href="/logout" class="nav-link2">Déconnexion</a>
 							</button>
 						</div>
-					</div>
+					{% else %}
+						<div class="col btn-lg d-flex justify-content-end  ">
+							<button type="button" class="container2 ">
+								<a href="/inscription" class="nav-link2">Inscription</a>
+							</button>
+						</div>
+					{% endif %}
 				</div>
+			</div>
 			</nav>
 
 			{% block content %}

@@ -101,7 +101,7 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 INSERT INTO skill (name) VALUES ('jardinage'), ('maconnerie'), ('mecanique'), ('menuiserie'), ('montage-meuble'), ('plomberie'), ('electricite'), ('carrelage'), ('carrosserie'), ('electronique'), ('informatique'), ('menage'), ('repassage');
-INSERT INTO category (name) VALUES ('plomberie'), ('bricolage'), ('demenagement'), ('pose_cuisine');
+INSERT INTO category (name) VALUES ('plomberie'), ('bricolage'), ('demenagement'), ('pose cuisine'), ('peinture'), ('jardinage');
 
 
 INSERT INTO person (`firstname` , `lastname`, `mail`, `birth`, `user`,`pass`, `adress`,`postal`, `town`) VALUES ('Jérémy', 'Gautrais', 'j.gautrais@compagnies.com', '1990-05-09', 'jeremy', 'root', '17 rue du Test', '69002', 'Lyon');

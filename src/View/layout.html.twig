@@ -66,14 +66,22 @@
 				{# navbar sur la partie haute #}
 				<a href="/" class="navbar-brand logo">ProxySoluce</a>
 
-				<div class="container-fluid d-flex bd-highlight mb-3 justify-content-end ">
-					<div class="row">
+			<div class="container-fluid d-flex bd-highlight mb-3 justify-content-end ">
+				<div class="row">
+					{% if session == true %}
+						<div class="col btn-lg d-flex justify-content-end">
+							<button type="button" class="container1" disabled>
+								    <p class="name align-items-center">{{ session.firstname }}</p>
+							</button>
+						</div>
+					{% else %}
 						<div class="col btn-lg d-flex justify-content-end   ">
 							<button type="button" class="container1 ">
 								<a href="/login" class="nav-link1 ">Connexion</a>
 							</button>
 						</div>
-					{% if userLogged == true %}
+					{% endif %}
+					{% if session == true %}
 						<div class="col btn-lg d-flex justify-content-end  ">
 							<button type="button" class="container2 ">
 								<a href="/logout" class="nav-link2">Déconnexion</a>
@@ -85,10 +93,9 @@
 								<a href="/inscription" class="nav-link2">Inscription</a>
 							</button>
 						</div>
-
 					{% endif %}
-					</div>
 				</div>
+			</div>
 			</nav>
 
 			{% block content %}

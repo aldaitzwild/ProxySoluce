@@ -8,9 +8,7 @@ class LogoutController extends AbstractController
     {
         if (isset($_SESSION['userLogged'])) { // Si connecté on déconnecte et on te redirige vers une page.
             session_destroy();
-            header("Location:/");
-        } else {
-            header("Location:/");
-        }
+        } 
+        header("Location: /");
     }
 }

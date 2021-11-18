@@ -55,7 +55,8 @@ class OfferingController extends AbstractController
             return null;
         }
 
-        return $this->twig->render('Offering/add.html.twig', ['categories' => $categories,
+        return $this->twig->render('Offering/add.html.twig', [
+            'categories' => $categories,
             'pageTitle' => "Ajouter une nouvelle offre"
         ]);
     }
@@ -85,7 +86,7 @@ class OfferingController extends AbstractController
             }
 
             if (count($errors) === 0) {
-                $offersByCategory = $offeringManager->selectByCategory($data);
+                $offersByCategory = $offeringManager->selectByCategoryAndCity($data);
                 if (count($offersByCategory) === 0) {
                     $params['empty'] = 'No offers available for this request.';
                 }
@@ -204,6 +205,13 @@ class OfferingController extends AbstractController
     {
         $offeringManager = new OfferingManager();
         $offers = $offeringManager->showAllOffer();
+        return $this->twig->render('Offering/showoffer.html.twig', ['offers' => $offers,]);
+    }
+
+    public function list(string $category): string
+    {
+        $offeringManager = new OfferingManager();
+        $offers = $offeringManager->selectByCategory($category);
         return $this->twig->render('Offering/showoffer.html.twig', ['offers' => $offers,]);
     }
 }

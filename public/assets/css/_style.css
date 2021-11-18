@@ -33,17 +33,17 @@
 
 #butmenu {
     position: absolute;
-    position:fixed;
-    color: #111;
-    z-index: 100;
-    margin-top: 250px;
+    position: fixed; 
+    color: var(--purple);
+    z-index: 5;
+    margin-top: 38vh;
 }
 
 .sidenav {
     height: 100%;
     width: 0;
     position: fixed;
-    z-index: 2;
+    z-index: 10;
     top: 0;
     left: 0;
     background-color: #111;
@@ -60,7 +60,6 @@
     display: block;
     transition: 0.3s;
 }
-  
 .sidenav a:hover {
     color: #f1f1f1;
 }
@@ -117,8 +116,6 @@
         text-decoration: none;
         font-weight:bold;
         font-size: medium;
-       
-           
     }
       
     .menu li :hover {

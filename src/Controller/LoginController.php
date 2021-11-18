@@ -23,7 +23,7 @@ class LoginController extends AbstractController
                     (password_verify($userPassword, $informationsDB['pass'])) == true
                 ) {
                     $_SESSION['userLogged'] = $informationsDB;
-                    return $this->twig->render('Home/home.html.twig', ['session' => $_SESSION['userLogged'],
+                    return $this->twig->render('Home/home.html.twig', ['userLogged' => $_SESSION['userLogged'],
                     'categories' => $categories]);
                 }
                 throw new Exception("Les informations sont incorrectes");

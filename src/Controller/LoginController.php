@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\CategoryManager;
 use App\Model\LoginManager;
 use Exception;
 
@@ -13,6 +14,8 @@ class LoginController extends AbstractController
             $userInformations = array_map('trim', $_POST);
             $userPassword = $userInformations['pass'];
             $loginManager = new LoginManager();
+            $categoryManager = new CategoryManager();
+            $categories = $categoryManager->selectAll();
             try {
                 $informationsDB = $loginManager->checkInformations($userInformations);
                 if (
@@ -20,7 +23,8 @@ class LoginController extends AbstractController
                     (password_verify($userPassword, $informationsDB['pass'])) == true
                 ) {
                     $_SESSION['userLogged'] = $informationsDB;
-                    return $this->twig->render('Login/welcome.html.twig', ['session' => $_SESSION['userLogged']]);
+                    return $this->twig->render('Home/home.html.twig', ['session' => $_SESSION['userLogged'],
+                    'categories' => $categories]);
                 }
                 throw new Exception("Les informations sont incorrectes");
             } catch (\Exception $e) {

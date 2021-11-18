@@ -1,5 +1,6 @@
-
 const deleteButton = document.getElementById('deleteOffer');
+
+if (deleteButton != null){
 
 deleteButton.addEventListener('click', (event) => {
     const confirm = window.confirm('Etes vous sur de vouloir supprimer cette annonce ?');
@@ -10,4 +11,6 @@ deleteButton.addEventListener('click', (event) => {
             event.preventDefault();
     return false;
     }
-})
+});
+
+}

@@ -72,7 +72,17 @@
 						<div class="col btn-lg d-flex justify-content-end   ">
 							<button type="button" class="container1 ">
 								{% if userLoggedInfo is defined %}
-									<a href="/profile" class="nav-link2">{{userLoggedInfo.firstname}}</a>
+									<a href="/profile" class="nav-link2 d-flex align-items-center">
+										<div class='person_img me-2'>
+											{% if userLoggedInfo.id is defined and userLoggedInfo.picture !='' %}
+												<img src="/uploads/{{userLoggedInfo.picture}}" alt="Profile pic">
+											{% else %}
+												<img src="/assets/images/placeholder-pic.png" alt="Profile pic">
+											{% endif %}
+
+										</div>
+										{{userLoggedInfo.firstname}}
+									</a>
 								{% else %}
 									<a href="/login" class="nav-link1 ">Connexion</a>
 								{% endif %}

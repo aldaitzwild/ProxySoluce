@@ -112,12 +112,24 @@ button {
     #000000 1px -1px;
   text-align: center;
 }
-.arrow{
+.arrow {
   color: black !important;
 }
-.carousel span{
+.carousel span {
   color: #000000 !important;
 }
-.name{
+.name {
   color: #c4c4c4 !important;
+}
+
+.person_img {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.person_img img {
+  max-width: 100%;
+  object-fit: cover;
 }

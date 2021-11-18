@@ -18,14 +18,14 @@ class OfferingController extends AbstractController
 
         $errors = [];
 
+        if (!isset($_SESSION['userLogged'])) {
+            header('Location:/login');
+            return null;
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $offering = array_map('trim', $_POST);
             $offering = array_map('stripslashes', $offering);
-
-            if (!isset($_SESSION['userLogged'])) {
-                header('Location:/login');
-                return null;
-            }
 
             if (empty($_POST['description'])) {
                 $errors['description'] = "Veuillez remplir la partie description";
@@ -212,6 +212,15 @@ class OfferingController extends AbstractController
     {
         $offeringManager = new OfferingManager();
         $offers = $offeringManager->selectByCategory($category);
+        return $this->twig->render('Offering/showoffer.html.twig', ['offers' => $offers,]);
+    }
+
+    public function listOwnOffers(): string
+    {
+        $id = $_SESSION['userLogged']['id'];
+
+        $offeringManager = new OfferingManager();
+        $offers = $offeringManager->selectByUserId($id);
         return $this->twig->render('Offering/showoffer.html.twig', ['offers' => $offers,]);
     }
 }

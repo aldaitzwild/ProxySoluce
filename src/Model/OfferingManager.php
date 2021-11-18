@@ -21,7 +21,7 @@ class OfferingManager extends AbstractManager
         return (int)$this->pdo->lastInsertId();
     }
 
-    public function selectByCategory(array $data): array
+    public function selectByCategoryAndCity(array $data): array
     {
         $statement = $this->pdo->prepare("SELECT p.firstname,
         p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category
@@ -31,6 +31,20 @@ class OfferingManager extends AbstractManager
         HAVING category=:category AND o.city=:city;");
         $statement->bindValue('category', $data['category'], \PDO::PARAM_STR);
         $statement->bindValue('city', $this->formatCity($data['city']), \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function selectByCategory(string $category): array
+    {
+        $statement = $this->pdo->prepare("SELECT p.firstname,
+        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category
+        FROM " . self::TABLE . " AS o
+        JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
+        JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id
+        HAVING category=:category");
+        $statement->bindValue('category', $category, \PDO::PARAM_STR);
         $statement->execute();
 
         return $statement->fetchAll();

@@ -27,6 +27,7 @@ return [
     'skill' => ['DragnDropController', 'index'],
     'offerings/add' => ['OfferingController', 'add'],
     'offerings/search' => ['OfferingController', 'search'],
+    'offerings/list' => ['OfferingController', 'list', ['category']],
     'offerings/show' => ['OfferingController', 'show', ['id']],
     'offering/delete' => ['OfferingController', 'delete'],
     'offering/update' => ['OfferingController', 'edit', ['id']],

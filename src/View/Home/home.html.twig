@@ -75,7 +75,7 @@
 
 			{% for categorie in categories %}
 				<div class=" col-lg-4 col-md-6 mb-9 mb-lg-0 container4 bodyBackground">
-					<a href="{{categorie.image1}}" class="thumbnail">
+					<a href="/offerings/list/?category={{categorie.name}}" class="thumbnail">
 						<img src="/assets/images/images1/{{categorie.name}}.png" alt="{{categorie.name}}" class="fluid img-thumbnail w-100 shadow-1-strong rounded mb-4">
 						<div class="texte_centrer">{{categorie.name}}</div>
 					</a>

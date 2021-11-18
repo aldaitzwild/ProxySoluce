@@ -199,4 +199,11 @@ class OfferingController extends AbstractController
             header('Location:/offerings/search');
         }
     }
+
+    public function showAll(): string
+    {
+        $offeringManager = new OfferingManager();
+        $offers = $offeringManager->showAllOffer();
+        return $this->twig->render('Offering/showoffer.html.twig', ['offers' => $offers,]);
+    }
 }

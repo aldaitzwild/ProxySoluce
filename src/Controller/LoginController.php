@@ -8,14 +8,12 @@ use Exception;
 
 class LoginController extends AbstractController
 {
-    public function login(): string
+    public function login(): ?string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userInformations = array_map('trim', $_POST);
             $userPassword = $userInformations['pass'];
             $loginManager = new LoginManager();
-            $categoryManager = new CategoryManager();
-            $categories = $categoryManager->selectAll();
             try {
                 $informationsDB = $loginManager->checkInformations($userInformations);
                 if (
@@ -23,8 +21,8 @@ class LoginController extends AbstractController
                     (password_verify($userPassword, $informationsDB['pass'])) == true
                 ) {
                     $_SESSION['userLogged'] = $informationsDB;
-                    return $this->twig->render('Home/home.html.twig', ['userLogged' => $_SESSION['userLogged'],
-                    'categories' => $categories]);
+                    header('Location: /');
+                    return null;
                 }
                 throw new Exception("Les informations sont incorrectes");
             } catch (\Exception $e) {

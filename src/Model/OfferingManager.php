@@ -24,7 +24,7 @@ class OfferingManager extends AbstractManager
     public function selectByCategoryAndCity(array $data): array
     {
         $statement = $this->pdo->prepare("SELECT p.firstname,
-        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category
+        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category, o.person_id
         FROM " . self::TABLE . " AS o
         JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
         JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id
@@ -39,12 +39,26 @@ class OfferingManager extends AbstractManager
     public function selectByCategory(string $category): array
     {
         $statement = $this->pdo->prepare("SELECT p.firstname,
-        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category
+        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category, o.person_id
         FROM " . self::TABLE . " AS o
         JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
         JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id
         HAVING category=:category");
         $statement->bindValue('category', $category, \PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchAll();
+    }
+
+    public function selectByUserId(int $id): array
+    {
+        $statement = $this->pdo->prepare("SELECT p.firstname,
+        p.lastname, p.id as userid, o.id, o.title, o.city, o.description, c.name AS category, o.person_id
+        FROM " . self::TABLE . " AS o
+        JOIN " . self::TABLE_PERSON . " AS p ON o.person_id=p.id
+        JOIN " . CategoryManager::TABLE . " AS c ON o.category_id=c.id
+        HAVING p.id=:id");
+        $statement->bindValue(':id', $id, \PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll();

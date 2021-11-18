@@ -29,6 +29,12 @@ a :hover {
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.person__img img {
+  max-width: 100%;
+  object-fit: cover;
 }
 
 .offer_user_skill {

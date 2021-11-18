@@ -68,13 +68,22 @@
 					<div class="row">
 						<div class="col btn-lg d-flex justify-content-end   ">
 							<button type="button" class="container1 ">
-								<a href="/login" class="nav-link1 ">Connexion</a>
+								{% if userLoggedInfo is defined %}
+									<a href="/profile" class="nav-link2">{{userLoggedInfo.firstname}}</a>
+								{% else %}
+									<a href="/login" class="nav-link1 ">Connexion</a>
+								{% endif %}
 							</button>
 						</div>
 
 						<div class="col btn-lg d-flex justify-content-end  ">
 							<button type="button" class="container2 ">
-								<a href="/logout" class="nav-link2">Déconnexion</a>
+								{% if userLoggedInfo is defined %}
+									<a href="/logout" class="nav-link2">Déconnexion</a>
+								{% else %}
+									<a href="/inscription" class="nav-link2">Inscription</a>
+								{% endif %}
+
 							</button>
 						</div>
 					</div>

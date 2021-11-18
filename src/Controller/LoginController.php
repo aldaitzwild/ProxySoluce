@@ -7,7 +7,7 @@ use Exception;
 
 class LoginController extends AbstractController
 {
-    public function login(): string
+    public function login(): ?string
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userInformations = array_map('trim', $_POST);
@@ -20,7 +20,8 @@ class LoginController extends AbstractController
                     (password_verify($userPassword, $informationsDB['pass'])) == true
                 ) {
                     $_SESSION['userLogged'] = $informationsDB;
-                    return $this->twig->render('Login/welcome.html.twig', ['session' => $_SESSION['userLogged']]);
+                    header('Location: /');
+                    return null;
                 }
                 throw new Exception("Les informations sont incorrectes");
             } catch (\Exception $e) {

@@ -24,5 +24,14 @@ abstract class AbstractController
             ]
         );
         $this->twig->addExtension(new DebugExtension());
+        $this->checkUserLogged();
+    }
+
+    private function checkUserLogged(): void
+    {
+        if (isset($_SESSION['userLogged'])) {
+            $userLogged = $_SESSION['userLogged'];
+            $this->twig->addGlobal('userLoggedInfo', $userLogged);
+        }
     }
 }

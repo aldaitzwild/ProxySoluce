@@ -1,0 +1,75 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/assets/css/offering_add.css">
+    <link rel="stylesheet" href="/assets/css/_form.css">
+	{# include css files for boostrap from CDN#}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+{% endblock %}
+{% block content %}
+    <section>
+
+        <main class="container">
+            <h1 class="fs-1 p-2 g-1">
+                {{ pageTitle }}
+            </h1>
+
+            <form class="row" method="post" action="{{ offering }}">
+                <div class="row g-1 align-items-center">
+                    <p class="col-12"> 
+                        <label for="category">Choisir une catégorie</label>
+                        <select class="form-select" id="category" name="category">
+                                <option value="default" disabled>--Sélectionnez une catégorie--</option>
+                                {% for category in categories %}
+                                    {% if category.name == offer.category %}
+                                        <option value="{{ category.id }}" selected='true' >{{ category.name }}</option>
+                                    {% else %}
+                                        <option value="{{ category.id }}">{{ category.name }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                        </select>
+                    </p>
+                </div>
+
+                    
+                <div class="row g-1 align-items-center">
+                    <p class="col-12 form-floating mb-3 form">
+                        <input type="text" class="form-control" id="floatingInputValue" placeholder="Titre" name="title" value="{{ offer.title }}" required>
+                        <label for="floatingInputValue">Titre</label>
+                    </p>
+                </div>
+                                
+                <div class="row g-1 align-items-center">
+                    <p class="col-12 form-floating mb-3 form">
+                        <input type="text" class="form-control" id="floatingInputValue" placeholder="Choisir la ville" name="city"  value="{{ offer.city }}" required>
+                        <label for="floatingInputValue">Choisir la ville</label>
+                    </p>
+                </div>
+
+                <div class="row g-1 align-items-center">
+                    <div class="form-floating">
+                        <textarea class="form-control" name="description" placeholder="Description" id="floatingTextarea2"  style="height: 100px" value="{{ offer.description }}" required></textarea>
+                        <label for="floatingTextarea2">Description</label>
+                    </div>
+                </div>
+
+                    <p>
+                        {% if errors is defined %}
+                            {% for error in errors %}
+                                <p>
+                                    {{error}}
+                                </p>
+                            {% endfor %}
+                        {% endif %}
+                    </p>
+                    
+                <div class="row" >
+                    <p class="col-6 text-center mx-auto">             
+                        <input class="gap-2 btn btn-outline-success col-sm-7" id="save" type="submit" value="Envoyer">
+                    </p>                               
+                </div>
+            </form>
+
+
+        </main>
+    </section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html.twig" %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="/assets/css/profile.css">
+{% endblock %}
+{% block content %}
+	<div class="container bg-white py-3 px-4 mt-4">
+
+		<h2 class="profile-title rounded mx-auto px-2 text-center mb-5">Trouvez vos solutions de proximité</h2>
+		<div class="row justify-content-center">
+			<a href="/profile/edit" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center">Modifier mon profil</a>
+
+			<a href="/profile/edit/skills" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center">Modifier mes compétences</a>
+
+			<a href="offerings/list/mine" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center">Modifier mes annonces</a>
+			<a href="/profile/delete" class="profile-link btn col-xs-8 col-sm-5 mx-2 my-2 d-flex align-items-center justify-content-center" id="deleteButton">Supprimer mon compte</a>
+
+
+		</div>
+		<div class="row justify-content-center mt-4">
+			<a href="#" class="profile-link btn col-xs-8 col-sm-5 mb-2 my-2 d-flex align-items-center justify-content-center mt-5">Je rencontre une difficulté</a>
+		</div>
+	</div>
+
+{% endblock %}
+{% block javascript %}
+	<script>
+		const deleteButton = document.getElementById('deleteButton');
+deleteButton.addEventListener('click', (event) => {
+const confirm = window.confirm('Etes-vous sûr de vouloir supprimer votre compte ?');
+if (confirm == true) {
+return true;
+} else {
+event.stopPropagation();
+event.preventDefault();
+return false;
+}
+})
+	</script>
+{% endblock %}

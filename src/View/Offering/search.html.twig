@@ -1,0 +1,77 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+	{# include css files for boostrap from CDN#}
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="/assets/css/offering_search.css">
+{% endblock %}
+{% block content %}
+	<div class='mx-auto p-4 mt-4 text-center container bg-white'>
+		<h2>Recherche d'annonces</h2>
+		<div class='row'>
+			<div class='mx-auto col-10'>
+
+				<h3 class="mt-4">Recherche par catégorie</h3>
+				<form method="POST" class="search_form bg-light mx-auto p-4">
+					<div class='row'>
+						<div class="mx-auto mb-4 col-12 col-lg-6">
+							<label for="category">Catégorie:
+							</label>
+							<select id="category" name="category">
+								<option value="default" disabled>--Sélectionnez une catégorie--</option>
+								{% for category in categories %}
+									<option value="{{ category.name }}">{{ category.name }}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="mx-auto mb-4 col-sm-12 col-md-12 col-lg-6">
+							<label for="city">Ville:</label>
+							<input type="text" id="city" name="city">
+						</div>
+					</div>
+
+					{% if errors is defined %}
+						{% for error in errors %}
+							<p>{{error}}
+							</p>
+						{% endfor %}
+					{% endif %}
+					<input type="submit" value="Search">
+				</form>
+			</div>
+
+			<div class='mx-auto col-10'>
+				{% if offers %}
+					<h3 class="mt-4">Résultats:</h3>
+					<div class="row">
+						{% for offer in offers %}
+
+							<div class="offer bg-light border border-muted mx-auto p-4 mb-4 text-left col-12 col-lg-5">
+								<a href="/offerings/show?id={{offer.id}}" class="offer-title-link text-decoration-none">
+									<h4 class="text-primary">{{offer.title}}</h4>
+								</a>
+								<mark class='px-4 py-2 rounded mb-2 d-inline-block'>{{offer.category}}</mark>
+								<p class="mb-2 font-italic">{{offer.firstname ~ " " ~ offer.lastname}}
+								</p>
+								<a href="/offerings/show?id={{offer.id}}">Détails</a>
+							</div>
+
+
+						{% endfor %}
+					</div>
+				{% endif %}
+
+				{% if empty is defined %}
+
+					<p class='alert alert-warning mt-4'>No offers available for this request.</p>
+
+				{% endif %}
+
+
+			</div>
+
+		</div>
+
+
+	</div>
+
+{% endblock %}

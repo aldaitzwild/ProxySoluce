@@ -1,0 +1,79 @@
+:root {
+  --primary-color: #c4c4c4;
+  --secondary-color: #fbfbfb;
+  --fill-color: #0e1212;
+  --purple: #94447c;
+  --bg-light: radial-gradient(
+    var(--primary-color),
+    transparent,
+    var(--purple) 130%
+  );
+}
+
+body {
+  background-color: lightgray !important;
+}
+.container a {
+  text-decoration: none !important;
+  color: var(--fill-color);
+}
+a :hover {
+  text-decoration: none !important;
+  color: #94447c;
+}
+.container {
+  border-radius: 1rem;
+}
+
+.person__img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.person__img img {
+  max-width: 100%;
+  object-fit: cover;
+}
+
+.offer_user_skill {
+  border-radius: 2rem;
+}
+
+.offer_item {
+  border-radius: 1rem;
+  border: 4px solid #ddd;
+}
+
+.form_label {
+  display: block;
+  width: 100%;
+}
+
+.form_input {
+  display: block;
+  width: 100%;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.svg-icon {
+  display: block;
+  width: 1.5rem;
+}
+.btn-outline-success {
+  border-color: var(--purple) !important;
+  color: var(--purple) !important;
+}
+.btn-outline-success:hover {
+  background-color: var(--purple) !important;
+  color: var(--secondary-color) !important;
+}
+.btn-outline-success a {
+  color: var(--fill-color);
+  text-decoration: none;
+}
+#session {
+  display: none;
+}

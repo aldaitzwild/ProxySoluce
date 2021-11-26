@@ -1,0 +1,27 @@
+.container {
+  border-radius: 1rem;
+}
+
+.profile-pic {
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+}
+
+.profile-title {
+  border: 2px solid var(--purple) !important;
+  width: max-content;
+  max-width: 100%;
+}
+
+.profile-link {
+  background-color: var(--purple) !important;
+  border: 2px solid var(--purple) !important;
+  color: white !important;
+  max-width: 80% !important;
+}
+
+#deleteButton {
+  background-color: red !important;
+  border: 2px solid red !important;
+}

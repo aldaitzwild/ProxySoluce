@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+{% block stylesheet %}
+	<link rel="stylesheet" href="/assets/css/_login.css">
+{% endblock %}
+{% block content %}
+	<div class="login">
+		<form class="row g-1 form" method="POST">
+			<div class="connexion">
+				<h1 class="fs-1 p-2 g-1">Connexion</h1>
+				<h3 class="fs-5 p-1 ms-5">Bienvenue</h3>
+				<div class="d-flex justify-content-center m-3 g-2">
+					{{ errors }}
+				</div>
+				<div class="row ms-3 g-1 align-items-center user">
+					<img class="col-2" src="/assets/images/user.png" alt="user">
+					<div class="col-10 form-floating form">
+						<input class="form-control ms-1" type="text" placeholder="Utilisateur" name="user" id="floatingInput" required>
+						<label for="floatingInput" class="label">Utilisateur :</label>
+					</div>
+				</div>
+
+				<div class="row ms-3 g-1 lock mt-4">
+					<img class="col-2 mt-2" src="/assets/images/lock.png" alt="locker">
+					<div class="col-10 form-floating text-center">
+						<input class="form-control ms-1" aria-describedby="passwordHelpInline" type="password" placeholder="Votre mot de passe" name="pass" id="floatingInput" required>
+						<label for="floatingInput">Mot de passe :</label>
+						<span id="passwordHelpInline" class="form-text">
+							Doit avoir 8 caractères, 1 majuscule et 1 chiffre.
+						</span>
+					</div>
+				</div>
+				<div class="arrow d-flex justify-content-end">
+					<button type="submit" class="btn btn-outline-success rounded-circle me-4"><img class="" src="/assets/images/arrowRight.png" alt="flécheD"></button>
+				</div>
+			</div>
+
+			<div>
+				</br></br>
+				<p>
+					Nouveau membre ?
+					<a href="/inscription">Inscription</a>
+				</p>
+			</div>
+		</form>
+	</div>
+
+{% endblock %}

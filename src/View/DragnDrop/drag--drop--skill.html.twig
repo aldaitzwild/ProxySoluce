@@ -1,0 +1,35 @@
+<div class="creation container w-100 border border-2 border-dark gap-1 p-1 bg-light">
+	<h1 class="fs-1 p-1 g-1">Création de votre profil</h1>
+	<h2 class="fs-5 p-4 g-1">Choissisez vos compétences :</h2>
+	<input type="text" value="" class="skills-filter btn btn-light my-3 text-left" placeholder="Recherchez dans la liste :">
+	<div class="d-flex flex-column">
+		<ul class="skills w-100 container list-group list-group-horizontal flex-wrap align-content-start">
+
+			{% for skillValue, skill in skills %}
+
+				{% include "DragnDrop/drag--drop--skill--item.html.twig" %}
+
+			{% endfor %}
+
+		</ul>
+		<form class="w-100 g-5" action="skill" method="POST">
+			<input type="hidden" name="userId" value="{{ userId }}">
+			<ul class="drop-zone w-100 h-100 container list-group list-group-horizontal flex-wrap align-items-start align-content-start border border-secondary border-2 rounded">
+				{% if selected is defined %}
+
+					{% for skillValue, skill in selected %}
+
+						{% include "DragnDrop/drag--drop--skill--item.html.twig" %}
+
+					{% endfor %}
+
+				{% endif %}
+
+			</ul>
+		</div>
+		{% if update is defined %}
+			<input type="hidden" name="update" value="{{update}}">
+		{% endif %}
+		<input type="submit" value="Enregistrer" class="gap-2 btn btn-outline-success col-12 mt-3 p-3">
+	</form>
+</div>

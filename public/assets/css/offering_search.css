@@ -1,0 +1,33 @@
+:root{
+  --primary-color: #c4c4c4;;
+  --secondary-color: #FBFBFB;
+  --fill-color : #0e1212;
+  --purple : #94447C;
+  --bg-light : radial-gradient(var(--primary-color),transparent,var(--purple) 130%);
+}
+body {
+  background-color: lightgray !important;
+}
+.container {
+  border-radius: 1rem;
+}
+input,
+select {
+  max-width: 12rem;
+  border-width: 2px;
+  border-radius: 2rem;
+  padding: 0.6rem 2rem;
+}
+input[type='submit'] {
+  padding: 0.6rem 4rem;
+}
+.search_form,
+.offer {
+  border-radius: 1.5rem;
+}
+.alert-warning {
+  border-radius: 1rem !important;
+}
+.offer-title-link:hover {
+  text-decoration: underline !important;
+}

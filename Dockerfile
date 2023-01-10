@@ -20,7 +20,7 @@ RUN composer install \
 # end Stage 1 #
 
 
-FROM php:8.0-fpm-alpine as phpserver
+FROM php:8.1-fpm-alpine as phpserver
 
 # add cli tools
 RUN apk update \
